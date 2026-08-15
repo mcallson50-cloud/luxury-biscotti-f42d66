@@ -1,0 +1,602 @@
+@import "tailwindcss" source("../");
+
+/* ============================================================
+   BLASSA STUDIO — design tokens
+   Structure follows the JOSEPH ATELIER system (Work Sans, flat
+   surfaces, pill buttons, single soft elevation level, airy
+   editorial grid). Palette is re-based from white/#141414 onto
+   the studio's cream + earth tones.
+
+   Everything below `@layer base` sits in `@layer components` so
+   that Tailwind utilities always win — `t-label text-[13px]`
+   has to resolve to 13px, and `frame absolute` has to actually
+   be absolute.
+   ============================================================ */
+
+@theme {
+  /* Canvas + surfaces */
+  --color-cream: #f4efe6;
+  --color-bone: #ebe3d6;
+  --color-sand: #ded2bd;
+  --color-linen: #faf7f1;
+
+  /* Ink — warm off-black, never pure #000 */
+  --color-ink: #211e1a;
+  --color-ink-soft: #4a443c;
+  --color-ink-faint: #857c6f;
+
+  /* Earth accents */
+  --color-clay: #6d5140;
+  --color-espresso: #2c241e;
+  --color-olive: #575e46;
+  --color-sage: #8b9179;
+
+  /* Type
+     Display is Impact regular. Impact ships with Windows and macOS, so it is
+     used directly where present; Anton (Google Fonts) is the web fallback for
+     Linux/Android, which is metrically close enough to keep the layout. */
+  --font-sans: "Work Sans", ui-sans-serif, sans-serif;
+  --font-display:
+    Impact, "Anton", "Haettenschweiler", "Franklin Gothic Bold",
+    "Arial Narrow Bold", sans-serif;
+
+  /* Radii — pill-first, per the reference system */
+  --radius-pill: 300px;
+  --radius-round: 100px;
+  --radius-card: 20px;
+  --radius-frame: 25px;
+
+  /* Single elevation level. Everything else is flat. */
+  --shadow-lift: 0 4px 80px 0 rgb(0 0 0 / 0.08);
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.45;
+    font-weight: 400;
+  }
+
+  ::selection {
+    background: var(--color-sand);
+    color: var(--color-espresso);
+  }
+
+  :focus-visible {
+    outline: 1.5px solid var(--color-clay);
+    outline-offset: 3px;
+  }
+
+  img,
+  video {
+    display: block;
+    max-width: 100%;
+  }
+}
+
+@layer components {
+  /* ----------------------------------------------------------
+     Typography roles
+     Tight leading from the reference table (display ~1.0,
+     headings ~1.1). Long-form prose is loosened to ~1.7 — the
+     reference's 1.3 body leading is for UI text, not paragraphs.
+     ---------------------------------------------------------- */
+
+  /* Impact is condensed and heavy: it wants a little positive tracking and
+     tighter leading than a serif display face would. */
+  .t-display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 0.92;
+    letter-spacing: 0.005em;
+    text-wrap: balance;
+  }
+
+  .t-heading {
+    font-weight: 400;
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  .t-label {
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  /* Header wordmark — Impact, set large across the top of the page. */
+  .wordmark {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 0.9;
+    letter-spacing: 0.015em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .t-body {
+    font-size: 15px;
+    line-height: 1.62;
+    color: var(--color-ink-soft);
+  }
+
+  .t-lead {
+    font-size: clamp(17px, 1.35vw, 20px);
+    line-height: 1.5;
+    color: var(--color-ink-soft);
+    letter-spacing: -0.005em;
+  }
+
+  /* ----------------------------------------------------------
+     Buttons — pill only (radius 300px)
+     ---------------------------------------------------------- */
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    border-radius: var(--radius-pill);
+    padding: 0.85rem 1.6rem;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition:
+      background-color 0.4s var(--ease-out-soft),
+      color 0.4s var(--ease-out-soft),
+      border-color 0.4s var(--ease-out-soft),
+      transform 0.4s var(--ease-out-soft);
+  }
+
+  .btn:active {
+    transform: translateY(1px);
+  }
+
+  .btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+
+  .btn-solid {
+    background: var(--color-espresso);
+    color: var(--color-linen);
+  }
+
+  .btn-solid:hover:not(:disabled) {
+    background: var(--color-clay);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--color-ink);
+    border-color: color-mix(in oklab, var(--color-ink) 22%, transparent);
+  }
+
+  .btn-ghost:hover:not(:disabled) {
+    background: var(--color-ink);
+    color: var(--color-linen);
+    border-color: var(--color-ink);
+  }
+
+  .btn-light {
+    background: var(--color-linen);
+    color: var(--color-espresso);
+  }
+
+  .btn-light:hover:not(:disabled) {
+    background: var(--color-sand);
+  }
+
+  /* Quiet text link with a rule that draws in on hover */
+  .link-rule {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 2px;
+  }
+
+  .link-rule::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    width: 100%;
+    background: currentColor;
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform 0.45s var(--ease-out-soft);
+  }
+
+  .link-rule:hover::after,
+  .link-rule[data-active="true"]::after {
+    transform: scaleX(1);
+  }
+
+  /* ----------------------------------------------------------
+     Texture: fixed paper grain over the cream canvas. Fixed and
+     non-interactive so it never taxes scrolling.
+     ---------------------------------------------------------- */
+
+  .grain {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.3;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+  }
+
+  /* ----------------------------------------------------------
+     Media frames
+     ---------------------------------------------------------- */
+
+  .frame {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--color-bone);
+    border-radius: var(--radius-frame);
+  }
+
+  /* Warm woven placeholder shown while loading, and left in place
+     if an asset never arrives — a missing image still reads as
+     part of the design. */
+  .frame::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        135deg,
+        color-mix(in oklab, var(--color-sand) 70%, transparent) 0 2px,
+        transparent 2px 7px
+      ),
+      linear-gradient(160deg, var(--color-bone), var(--color-sand));
+  }
+
+  .frame > img,
+  .frame > video {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.9s var(--ease-out-soft);
+  }
+
+  .frame > img[data-loaded="true"],
+  .frame > video[data-loaded="true"] {
+    opacity: 1;
+  }
+
+  /* Video layers over its own poster still, so a missing /media
+     file degrades to the photograph rather than to a black box. */
+  .frame > video.frame-video {
+    position: absolute;
+    inset: 0;
+  }
+
+  .frame-flat {
+    border-radius: 0;
+  }
+
+  .frame-card {
+    border-radius: var(--radius-card);
+  }
+
+  /* Harmonises stock photography with the studio's warm feed. */
+  .tone > img,
+  .tone > video {
+    filter: saturate(0.88) sepia(0.07) contrast(1.02);
+  }
+
+  /* Slow filmic drift on hero + feature media */
+  .frame-drift > img,
+  .frame-drift > video {
+    animation: drift 26s var(--ease-out-soft) infinite alternate;
+  }
+
+  /* Zoom on hover for cards */
+  .frame-zoom > img {
+    transition:
+      opacity 0.9s var(--ease-out-soft),
+      transform 1.1s var(--ease-out-soft);
+  }
+
+  .group:hover .frame-zoom > img {
+    transform: scale(1.045);
+  }
+
+  /* ----------------------------------------------------------
+     Reveal on scroll
+
+     Gated behind [data-js] (set by an inline script in <head>) so
+     that without JavaScript content is simply visible rather than
+     stuck at opacity 0.
+     ---------------------------------------------------------- */
+
+  [data-js="true"] .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition:
+      opacity 1s var(--ease-out-soft),
+      transform 1s var(--ease-out-soft);
+  }
+
+  [data-js="true"] .reveal[data-visible="true"] {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ----------------------------------------------------------
+     Marquee
+     ---------------------------------------------------------- */
+
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 46s linear infinite;
+  }
+
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  /* Image ribbon. Spacing lives on the tiles, not in a flex gap, so the
+     two halves are exactly equal and the -50% seam is invisible. */
+  .photo-marquee {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 5%,
+      #000 95%,
+      transparent
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 5%,
+      #000 95%,
+      transparent
+    );
+  }
+
+  .photo-marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 70s linear infinite;
+  }
+
+  /* Travels left-to-right: the same loop, played backwards. */
+  .photo-marquee-right {
+    animation-direction: reverse;
+  }
+
+  .photo-marquee:hover .photo-marquee-track {
+    animation-play-state: paused;
+  }
+
+  .rise > span {
+    display: block;
+    animation: rise 1.15s var(--ease-out-soft) both;
+  }
+
+  .fade-in {
+    animation: fade-in 1.4s var(--ease-out-soft) both;
+  }
+
+  /* ----------------------------------------------------------
+     Article prose
+     ---------------------------------------------------------- */
+
+  .prose-blassa {
+    font-size: 16px;
+    line-height: 1.72;
+    color: var(--color-ink-soft);
+  }
+
+  .prose-blassa > * + * {
+    margin-top: 1.35em;
+  }
+
+  .prose-blassa h2 {
+    font-size: 25px;
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+    color: var(--color-ink);
+    margin-top: 2.6em;
+  }
+
+  .prose-blassa h3 {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--color-ink);
+    margin-top: 2.2em;
+  }
+
+  .prose-blassa blockquote {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 2.4vw, 30px);
+    line-height: 1.1;
+    letter-spacing: 0.005em;
+    color: var(--color-clay);
+    padding-left: 1.1rem;
+    border-left: 1px solid var(--color-sand);
+    margin-block: 2.2em;
+  }
+
+  .prose-blassa blockquote p {
+    margin: 0;
+  }
+
+  .prose-blassa a {
+    color: var(--color-clay);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  .prose-blassa ul,
+  .prose-blassa ol {
+    padding-left: 1.15rem;
+  }
+
+  .prose-blassa ul {
+    list-style: none;
+  }
+
+  .prose-blassa ul li {
+    position: relative;
+  }
+
+  .prose-blassa ul li::before {
+    content: "";
+    position: absolute;
+    left: -1.05rem;
+    top: 0.72em;
+    width: 5px;
+    height: 1px;
+    background: var(--color-clay);
+  }
+
+  .prose-blassa ol {
+    list-style: decimal;
+  }
+
+  .prose-blassa li + li {
+    margin-top: 0.5em;
+  }
+
+  .prose-blassa strong {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+
+  .prose-blassa img {
+    border-radius: var(--radius-frame);
+    margin-block: 2em;
+  }
+
+  /* ----------------------------------------------------------
+     Form fields
+     ---------------------------------------------------------- */
+
+  .field {
+    width: 100%;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid color-mix(in oklab, var(--color-ink) 20%, transparent);
+    padding: 0.7rem 0;
+    font-family: var(--font-sans);
+    font-size: 15px;
+    color: var(--color-ink);
+    border-radius: 0;
+    transition: border-color 0.35s var(--ease-out-soft);
+  }
+
+  .field::placeholder {
+    color: var(--color-ink-faint);
+  }
+
+  .field:focus {
+    outline: none;
+    border-bottom-color: var(--color-clay);
+  }
+
+  .field[aria-invalid="true"] {
+    border-bottom-color: #9a4a34;
+  }
+
+  textarea.field {
+    resize: vertical;
+    min-height: 7rem;
+  }
+}
+
+/* ============================================================
+   Keyframes
+   ============================================================ */
+
+@keyframes drift {
+  from {
+    transform: scale(1.02);
+  }
+  to {
+    transform: scale(1.12);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(115%);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-js="true"] .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* The image ribbon stops travelling and becomes a plain scroller. */
+  .photo-marquee {
+    overflow-x: auto;
+  }
+
+  .photo-marquee-track {
+    animation: none !important;
+    transform: none !important;
+  }
+}
