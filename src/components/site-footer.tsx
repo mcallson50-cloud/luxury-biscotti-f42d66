@@ -32,11 +32,8 @@ export function SiteFooter() {
           <div>
             <h2 className="t-label text-ink-faint">Find us</h2>
             <address className="mt-4 grid gap-2.5 text-[15px] not-italic">
-              <span>
-                {site.address.street}
-                <br />
-                {site.address.postcode} {site.address.city}
-              </span>
+              <a href={site.mapsUrl} target="_blank" rel="noreferrer noopener" className="link-rule">{site.locationLabel}</a>
+              <span>{site.hoursSummary}</span>
               <a href={`mailto:${site.contact.email}`} className="link-rule">
                 {site.contact.email}
               </a>

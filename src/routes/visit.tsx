@@ -12,35 +12,12 @@ export const Route = createFileRoute('/visit')({
       { title: `Visit — ${site.name}` },
       {
         name: 'description',
-        content: `${site.address.street}, ${site.address.postcode} ${site.address.city}. Opening hours, how to reach us, and how to get in touch.`,
+        content: `${site.tagline}. ${site.locationLabel}. ${site.hoursSummary}.`,
       },
     ],
   }),
   component: Visit,
 })
-
-const weekdays = [
-  'Sunday',
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
-]
-
-/** True when `days` is today, including ranges like "Tuesday — Thursday". */
-function coversToday(days: string, today: string): boolean {
-  if (days.includes(today)) return true
-
-  const [from, to] = days.split('—').map((part) => part.trim())
-  if (!from || !to) return false
-
-  const start = weekdays.indexOf(from)
-  const end = weekdays.indexOf(to)
-  const now = weekdays.indexOf(today)
-  return start !== -1 && end !== -1 && now >= start && now <= end
-}
 
 /** OpenStreetMap embed — no API key, no third-party cookies. */
 function mapUrls() {
@@ -49,10 +26,8 @@ function mapUrls() {
   const bbox = [lng - d, lat - d / 2, lng + d, lat + d / 2].join('%2C')
   return {
     embed: `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat}%2C${lng}`,
-    link: `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lng}#map=17/${lat}/${lng}`,
-    directions: `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
-      `${site.address.street}, ${site.address.postcode} ${site.address.city}`,
-    )}`,
+    link: site.mapsUrl,
+    directions: site.mapsUrl,
   }
 }
 
@@ -62,7 +37,7 @@ function Visit() {
   // Resolved after mount so the server and the visitor's clock can't disagree.
   const [today, setToday] = useState<string | null>(null)
   useEffect(() => {
-    setToday(weekdays[new Date().getDay()] ?? null)
+    setToday(new Intl.DateTimeFormat('en-US', { weekday: 'long', timeZone: 'Africa/Casablanca' }).format(new Date()))
   }, [])
 
   return (
@@ -71,7 +46,7 @@ function Visit() {
       <section className="pt-28 md:pt-36">
         <Container>
           <p className="t-label text-ink-faint">
-            {site.address.neighbourhood} — {site.address.city}
+            {site.locationLabel}
           </p>
           <h1 className="t-display mt-5 text-[clamp(44px,8vw,138px)]">
             Come and sit
@@ -82,11 +57,7 @@ function Visit() {
             <div className="lg:col-span-4">
               <h2 className="t-label text-ink-faint">The address</h2>
               <address className="t-lead mt-4 not-italic">
-                {site.address.street}
-                <br />
-                {site.address.postcode} {site.address.city}
-                <br />
-                {site.address.country}
+                {site.locationLabel}
               </address>
               <div className="mt-6 flex flex-wrap gap-3">
                 <a
@@ -102,12 +73,8 @@ function Visit() {
 
             <div className="lg:col-span-4">
               <h2 className="t-label text-ink-faint">Getting here</h2>
-              <ul className="t-body mt-4 grid gap-2.5">
-                <li>U-Bahn to Rathaus Neukölln, then six minutes on foot.</li>
-                <li>Ring bell 4 for the studio entrance if the café is full.</li>
-                <li>Bike racks on the corner. Cargo bikes fit in the yard.</li>
-                <li>Step-free entry, and the back room has room to turn.</li>
-              </ul>
+              <p className="t-body mt-4">Find BLASSA STUDIO in Tamraght, Morocco. Open our Google Maps listing for the exact location and directions.</p>
+              <p className="t-body mt-4">{site.tagline}</p>
             </div>
 
             <div className="lg:col-span-4">
@@ -162,13 +129,13 @@ function Visit() {
           <SectionHead
             index="01"
             label="Opening hours"
-            aside={today ? `Today — ${today}` : 'Tuesday to Sunday'}
+            aside={today ? `Today — ${today}` : 'Saturday to Thursday'}
           />
           <div className="mt-10 grid gap-12 lg:grid-cols-12 lg:gap-10">
             <div className="lg:col-span-5">
               <ul>
                 {site.hours.map((row) => {
-                  const isToday = today ? coversToday(row.days, today) : false
+                  const isToday = today ? row.days === today : false
                   return (
                     <li
                       key={row.days}
@@ -179,11 +146,7 @@ function Visit() {
                         {isToday ? (
                           <span className="t-label ml-3 text-clay">Today</span>
                         ) : null}
-                        {'note' in row && row.note ? (
-                          <span className="mt-1 block text-[12px] text-ink-faint">
-                            {row.note}
-                          </span>
-                        ) : null}
+
                       </span>
                       <span
                         className={
@@ -207,7 +170,7 @@ function Visit() {
             <div className="lg:col-span-7">
               <div className="frame frame-card aspect-[4/3] w-full">
                 <iframe
-                  title={`Map showing ${site.name} at ${site.address.street}`}
+                  title={`Map showing ${site.name} in ${site.locationLabel}`}
                   src={maps.embed}
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
@@ -217,7 +180,7 @@ function Visit() {
               </div>
               <div className="mt-3 flex flex-wrap items-baseline justify-between gap-3 border-t border-ink/12 pt-2.5">
                 <p className="t-body text-[13px]">
-                  {site.address.street} — the corner unit with the green door.
+                  {site.locationLabel}
                 </p>
                 <a
                   href={maps.link}

@@ -34,26 +34,27 @@ function Home() {
               className="t-label fade-in text-linen/80"
               style={{ animationDelay: '120ms' }}
             >
-              {site.address.neighbourhood}, {site.address.city} — est. 2025
+              {site.locationLabel}
             </p>
 
-            <h1 className="rise t-display mt-4 overflow-hidden pb-[0.06em] text-[clamp(48px,8vw,112px)] text-linen">
-              <span style={{ animationDelay: '80ms' }}>Coffee.</span>
-              <span style={{ animationDelay: '220ms' }}>Community.</span>
+            <h1 className="rise t-display mt-4 overflow-hidden pb-[0.06em] text-[clamp(36px,7vw,96px)] text-linen">
+              <span style={{ animationDelay: '80ms' }}>Culture.</span>
+              <span style={{ animationDelay: '220ms' }}>Café.</span>
               <span style={{ animationDelay: '360ms' }} className="text-sand">
-                Clothing.
+                Creative space.
               </span>
             </h1>
 
             <div
-              className="fade-in mt-8 flex flex-col gap-6 md:flex-row md:items-end md:justify-between"
+              className="fade-in mt-8 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between"
               style={{ animationDelay: '700ms' }}
             >
               <p className="t-lead max-w-md text-linen/85">
                 <em className="not-italic text-sand">Blassa</em> is Darija for the
-                place. Coffee, clothing, and a little time together.
+                place. Culture, café, and a little time together.
               </p>
-              <div className="flex flex-wrap gap-3">
+              <p className="t-body text-linen">{site.hoursSummary}</p>
+              <div className="flex shrink-0 flex-wrap gap-3">
                 <Link to="/" hash="menu" className="btn btn-light">
                   View menu
                 </Link>
@@ -169,7 +170,8 @@ function Home() {
           <div className="flex flex-col gap-6 border-t border-ink/15 pt-8 md:flex-row md:items-center md:justify-between">
             <div>
               <h2 className="t-display text-[clamp(32px,4vw,52px)]">See you at BLASSA.</h2>
-              <p className="t-body mt-3">{site.address.street}, {site.address.city}</p>
+              <p className="t-body mt-3">{site.locationLabel}</p>
+              <p className="t-body mt-2">{site.hoursSummary}</p>
             </div>
             <Link to="/visit" className="btn btn-solid self-start md:self-auto">Opening hours &amp; directions</Link>
           </div>

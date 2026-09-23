@@ -1,29 +1,26 @@
-/**
- * Single source of truth for the studio's real-world details.
- *
- * ⚠️ PLACEHOLDER DATA — the address, phone number, email, coordinates and
- * opening hours below are stand-ins so the Visit page renders completely.
- * Replace them with BLASSA Studio's actual details before going live; nothing
- * else in the codebase hard-codes them.
- */
+/** Studio details. Contact email, phone and site URL remain placeholders. */
 
 export const site = {
   name: 'BLASSA STUDIO',
-  tagline: 'Coffee. Community. Clothing.',
+  tagline: 'Culture • Café • Creative space',
   description:
-    'A café and clothing studio built around one idea: a place worth staying in. Slow coffee, a small in-house collection, and a room that fills up with regulars.',
+    'Culture, café and creative space in Tamraght, Morocco. Open 9:30am to 5pm, Saturday to Thursday. Closed Friday.',
   url: 'https://blassastudio.com',
 
   address: {
-    street: 'Weichselstraße 14',
-    postcode: '12045',
-    city: 'Berlin',
-    country: 'Germany',
-    neighbourhood: 'Neukölln',
+    street: '',
+    postcode: '',
+    city: 'Tamraght',
+    country: 'Morocco',
+    neighbourhood: 'Tamraght',
   },
 
   /** Used for the embedded map — update alongside the address. */
-  coordinates: { lat: 52.4813, lng: 13.4374 },
+  coordinates: { lat: 30.5114614, lng: -9.6764371 },
+
+  locationLabel: 'Tamraght, Morocco',
+  hoursSummary: 'Open 9:30am – 5pm • Friday closed',
+  mapsUrl: 'https://www.google.com/maps/place/BLASSA+STUDIO/@30.5114614,-9.6764371,17z/data=!3m1!4b1!4m6!3m5!1s0xdb3b3ad17ad7dfb:0x614139f4b32b431d!8m2!3d30.5114614!4d-9.6764371!16s%2Fg%2F11yqb94cnk!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDkyMC4wIKXMDSoASAFQAw%3D%3D',
 
   contact: {
     email: 'hej@blassastudio.com',
@@ -33,21 +30,21 @@ export const site = {
   },
 
   social: {
-    instagram: 'https://www.instagram.com/blassastudio',
-    instagramHandle: '@blassastudio',
+    instagram: 'https://www.instagram.com/blassa.studio/',
+    instagramHandle: '@blassa.studio',
   },
 
   hours: [
-    { days: 'Monday', open: 'Closed', note: 'Roasting + restock' },
-    { days: 'Tuesday — Thursday', open: '08:00 — 17:00' },
-    { days: 'Friday', open: '08:00 — 18:00' },
-    { days: 'Saturday', open: '09:00 — 18:00' },
-    { days: 'Sunday', open: '10:00 — 16:00', note: 'Kitchen until 15:00' },
+    { days: 'Monday', open: '9:30am – 5pm' },
+    { days: 'Tuesday', open: '9:30am – 5pm' },
+    { days: 'Wednesday', open: '9:30am – 5pm' },
+    { days: 'Thursday', open: '9:30am – 5pm' },
+    { days: 'Friday', open: 'Closed' },
+    { days: 'Saturday', open: '9:30am – 5pm' },
+    { days: 'Sunday', open: '9:30am – 5pm' },
   ],
+  hoursNote: 'Open Saturday to Thursday. Closed on Fridays.',
 
-  /** Shown on the Visit page under the hours block. */
-  hoursNote:
-    'The clothing rail is open whenever the café is. Fittings after 16:00 are easiest — the room is quieter and someone can actually help you.',
 } as const
 
 export const nav = [
