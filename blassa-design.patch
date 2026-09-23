@@ -1,0 +1,898 @@
+diff --git a/src/components/instagram-feed.tsx b/src/components/instagram-feed.tsx
+index 8c36fcd..7c72559 100644
+--- a/src/components/instagram-feed.tsx
++++ b/src/components/instagram-feed.tsx
+@@ -25,13 +25,13 @@ const tiles: Tile[] = [
+   { photo: 'spacePlants', caption: 'The monstera has taken the corner' },
+ ]
+ 
+-export function InstagramFeed({ index = '07' }: { index?: string }) {
++export function InstagramFeed({ index }: { index?: string } = {}) {
+   return (
+-    <section className="mt-24 md:mt-32">
++    <section className="mt-16 md:mt-24">
+       <Container>
+         <SectionHead
+           index={index}
+-          label="From the feed"
++          label="Around BLASSA"
+           aside={
+             <a
+               href={site.social.instagram}
+@@ -45,9 +45,9 @@ export function InstagramFeed({ index = '07' }: { index?: string }) {
+         />
+       </Container>
+ 
+-      {/* Horizontal scroll on small screens, 8-up ribbon on desktop. */}
+-      <div className="mt-6 flex snap-x snap-mandatory gap-2.5 overflow-x-auto px-5 pb-2 md:grid md:grid-cols-4 md:overflow-visible md:px-10 lg:grid-cols-8">
+-        {tiles.map((tile) => (
++      {/* Four curated images, with horizontal scrolling on small screens. */}
++      <div className="mt-6 flex snap-x snap-mandatory gap-2.5 overflow-x-auto px-5 pb-2 md:grid md:grid-cols-4 md:overflow-visible md:px-10 ">
++        {tiles.slice(0, 4).map((tile) => (
+           <a
+             key={tile.photo}
+             href={site.social.instagram}
+@@ -61,7 +61,7 @@ export function InstagramFeed({ index = '07' }: { index?: string }) {
+               radius="card"
+               width={560}
+               zoom
+-              sizes="(min-width: 1024px) 12vw, (min-width: 768px) 24vw, 68vw"
++              sizes="(min-width: 768px) 24vw, 68vw"
+             />
+             <span className="pointer-events-none absolute inset-0 flex items-end bg-espresso/0 p-3 opacity-0 transition-all duration-500 group-hover:bg-espresso/45 group-hover:opacity-100">
+               <span className="text-[12px] leading-snug text-linen">
+diff --git a/src/components/site-footer.tsx b/src/components/site-footer.tsx
+index c05d324..515d05e 100644
+--- a/src/components/site-footer.tsx
++++ b/src/components/site-footer.tsx
+@@ -1,28 +1,24 @@
+ import { Link } from '@tanstack/react-router'
+ 
+-import { NewsletterForm } from '@/components/newsletter-form'
+ import { nav, site } from '@/data/site'
+ 
+ export function SiteFooter() {
+   return (
+-    <footer className="mt-24 border-t border-ink/12 bg-cream md:mt-32">
+-      <div className="mx-auto max-w-[1560px] px-5 py-14 md:px-10 md:py-20">
+-        <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
+-          <div className="lg:col-span-5">
++    <footer className="mt-16 border-t border-ink/12 bg-cream md:mt-24">
++      <div className="mx-auto max-w-[1560px] px-5 py-10 md:px-10 md:py-12">
++        <div className="grid gap-8 md:grid-cols-3 md:gap-10">
++          <div>
+             <p className="t-label text-ink-faint">{site.tagline}</p>
+-            <p className="t-display mt-5 max-w-[9ch] text-[clamp(56px,9vw,116px)]">
++            <p className="t-display mt-4 text-[48px]">
+               Blassa
+             </p>
+-            <p className="t-body mt-5 max-w-sm">
+-              Blassa is Darija for <em>the place</em>. Ours is on{' '}
+-              {site.address.street} in {site.address.neighbourhood} — open early,
+-              quiet by four, full of the same faces.
+-            </p>
++
+           </div>
+ 
+-          <div className="lg:col-span-2 lg:col-start-7">
++          <div>
+             <h2 className="t-label text-ink-faint">Pages</h2>
+             <ul className="mt-4 grid gap-2.5">
++              <li><Link to="/" hash="menu" className="link-rule text-[15px]">Menu</Link></li>
+               {nav.map((item) => (
+                 <li key={item.to}>
+                   <Link to={item.to} className="link-rule text-[15px]">
+@@ -33,7 +29,7 @@ export function SiteFooter() {
+             </ul>
+           </div>
+ 
+-          <div className="lg:col-span-2">
++          <div>
+             <h2 className="t-label text-ink-faint">Find us</h2>
+             <address className="mt-4 grid gap-2.5 text-[15px] not-italic">
+               <span>
+@@ -58,16 +54,9 @@ export function SiteFooter() {
+             </address>
+           </div>
+ 
+-          <div className="lg:col-span-3">
+-            <h2 className="t-label text-ink-faint">Once a month, at most</h2>
+-            <p className="t-body mt-4 text-[14px]">
+-              New drops, workshop dates, and whichever filter is on the bar.
+-            </p>
+-            <NewsletterForm />
+-          </div>
+         </div>
+ 
+-        <div className="mt-14 flex flex-col-reverse gap-4 border-t border-ink/12 pt-6 md:flex-row md:items-center md:justify-between">
++        <div className="mt-8 flex flex-col-reverse gap-4 border-t border-ink/12 pt-6 md:flex-row md:items-center md:justify-between">
+           <p className="t-label text-ink-faint">
+             © {new Date().getFullYear()} {site.name}
+           </p>
+diff --git a/src/components/site-header.tsx b/src/components/site-header.tsx
+index 0c86a37..59dc550 100644
+--- a/src/components/site-header.tsx
++++ b/src/components/site-header.tsx
+@@ -4,15 +4,7 @@ import { useEffect, useState } from 'react'
+ import { nav, site } from '@/data/site'
+ import { cn } from '@/lib/utils'
+ 
+-/**
+- * Fixed header. Transparent over hero media, then settles onto cream once the
+- * page scrolls. Two elements only: the wordmark set large and centred, and a
+- * three-dot trigger on the right that opens the full menu at every breakpoint.
+- *
+- * The row is a 1fr/auto/1fr grid rather than a flex row: the empty left cell
+- * mirrors the trigger's width, so the wordmark sits on the true centre of the
+- * page instead of the centre of the space left over beside the button.
+- */
++/** Visible desktop navigation with a compact mobile menu. */
+ export function SiteHeader() {
+   const [scrolled, setScrolled] = useState(false)
+   const [open, setOpen] = useState(false)
+@@ -44,6 +36,13 @@ export function SiteHeader() {
+     return () => window.removeEventListener('keydown', onKey)
+   }, [open])
+ 
++  useEffect(() => {
++    const desktop = window.matchMedia('(min-width: 768px)')
++    const closeOnDesktop = () => { if (desktop.matches) setOpen(false) }
++    desktop.addEventListener('change', closeOnDesktop)
++    return () => desktop.removeEventListener('change', closeOnDesktop)
++  }, [])
++
+   // Only the home page puts dark hero video behind the header. Everywhere else
+   // the top of the page is cream, so the wordmark and dots stay ink.
+   const overMedia = pathname === '/' && !scrolled && !open
+@@ -58,13 +57,12 @@ export function SiteHeader() {
+           : 'bg-transparent',
+       )}
+     >
+-      <div className="mx-auto grid max-w-[1560px] grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 py-4 md:px-10 md:py-5">
+-        <span aria-hidden />
++      <div className="mx-auto flex max-w-[1560px] justify-between items-center gap-4 px-5 py-4 md:px-10 md:py-5">
+ 
+         <Link
+           to="/"
+           className={cn(
+-            'wordmark justify-self-center text-center text-[clamp(21px,4.4vw,46px)] transition-colors duration-700',
++            'wordmark justify-self-center text-center text-[clamp(24px,3vw,38px)] transition-colors duration-700',
+             onCream ? 'text-ink' : 'text-linen',
+           )}
+           aria-label={`${site.name} — home`}
+@@ -72,15 +70,22 @@ export function SiteHeader() {
+           {site.name}
+         </Link>
+ 
+-        {/* Three dots — the only control up here. */}
++        <nav aria-label="Primary" className={cn('hidden items-center gap-8 md:flex', onCream ? 'text-ink' : 'text-linen')}>
++          {nav.map((item) => (
++            <Link key={item.to} to={item.to} className="t-label link-rule py-2" activeProps={{ 'aria-current': 'page' }} activeOptions={{ exact: true }}>{item.label}</Link>
++          ))}
++          <Link to="/" hash="menu" className="t-label link-rule py-2">Menu</Link>
++        </nav>
++
+         <button
+           type="button"
+           onClick={() => setOpen((v) => !v)}
+-          className="-mr-2 flex h-11 w-11 shrink-0 items-center justify-center justify-self-end"
++          className={cn("flex h-11 items-center gap-2 px-2 text-sm md:hidden", onCream ? "text-ink" : "text-linen")}
+           aria-expanded={open}
+           aria-controls="site-menu"
+           aria-label={open ? 'Close menu' : 'Open menu'}
+         >
++          <span>{open ? 'Close' : 'Menu'}</span>
+           <span aria-hidden className="flex flex-col items-center gap-[5px]">
+             {[0, 1, 2].map((i) => (
+               <span
+@@ -99,23 +104,23 @@ export function SiteHeader() {
+       <div
+         id="site-menu"
+         hidden={!open}
+-        className="border-t border-ink/10 bg-cream px-5 pt-6 pb-9 md:px-10 md:pt-8 md:pb-12"
++        className="border-t border-ink/10 bg-cream px-5 pt-4 pb-6 md:hidden"
+       >
+-        <nav className="grid gap-1" aria-label="Primary">
++        <nav className="grid gap-1" aria-label="Mobile navigation">
++          <Link to="/" hash="menu" onClick={() => setOpen(false)} className="t-display border-b border-ink/8 py-3.5 text-[34px]">View menu</Link>
+           {nav.map((item) => (
+             <Link
+               key={item.to}
+               to={item.to}
+-              className="t-display border-b border-ink/8 py-3.5 text-[clamp(34px,6vw,68px)]"
++              onClick={() => setOpen(false)}
++              className="t-display border-b border-ink/8 py-3.5 text-[34px]"
+             >
+               {item.label}
+             </Link>
+           ))}
+         </nav>
+         <div className="mt-7 flex flex-wrap items-center gap-4">
+-          <Link to="/shop" className="btn btn-solid">
+-            Shop the capsule
+-          </Link>
++
+           <a
+             href={site.social.instagram}
+             target="_blank"
+diff --git a/src/data/site.ts b/src/data/site.ts
+index 8592f0d..5c783d5 100644
+--- a/src/data/site.ts
++++ b/src/data/site.ts
+@@ -53,6 +53,5 @@ export const site = {
+ export const nav = [
+   { label: 'Home', to: '/' },
+   { label: 'Shop', to: '/shop' },
+-  { label: 'Journal', to: '/journal' },
+   { label: 'Visit', to: '/visit' },
+ ] as const
+diff --git a/src/routes/index.tsx b/src/routes/index.tsx
+index be9a49b..143c395 100644
+--- a/src/routes/index.tsx
++++ b/src/routes/index.tsx
+@@ -1,26 +1,20 @@
+ import { Link, createFileRoute } from '@tanstack/react-router'
+ 
+ import { InstagramFeed } from '@/components/instagram-feed'
+-import { Marquee } from '@/components/marquee'
+-import { Figure, Frame, VideoPanel } from '@/components/media'
++import { Frame, VideoPanel } from '@/components/media'
+ import { Reveal } from '@/components/reveal'
+ import { Container, SectionHead } from '@/components/ui/primitives'
+-import { coffeeStory, collection, menu } from '@/data/collection'
++import { menu } from '@/data/collection'
+ import { site } from '@/data/site'
+-import { formatDate, journal, leadPost } from '@/lib/journal'
+ 
+-export const Route = createFileRoute('/')({
+-  component: Home,
+-})
++export const Route = createFileRoute('/')({ component: Home })
+ 
+ function Home() {
+-  const otherPosts = journal.filter((post) => post.slug !== leadPost?.slug).slice(0, 2)
+-
+   return (
+     <>
+       {/* ── Hero: the film fills the first screen ──────────────── */}
+       <section className="relative">
+-        <div className="relative h-[100svh] min-h-[600px] w-full overflow-hidden">
++        <div className="relative min-h-[640px] h-[90svh] max-h-[960px] w-full overflow-hidden">
+           <VideoPanel
+             video="/media/hero.mp4"
+             poster="spaceGreenRoom"
+@@ -35,7 +29,7 @@ function Home() {
+             className="absolute inset-0 bg-gradient-to-t from-espresso/72 via-espresso/18 to-espresso/28"
+           />
+ 
+-          <Container className="relative flex h-full flex-col justify-end pb-12 md:pb-16">
++          <Container className="relative flex h-full flex-col justify-end pt-28 pb-10 md:pb-14">
+             <p
+               className="t-label fade-in text-linen/80"
+               style={{ animationDelay: '120ms' }}
+@@ -43,7 +37,7 @@ function Home() {
+               {site.address.neighbourhood}, {site.address.city} — est. 2025
+             </p>
+ 
+-            <h1 className="rise t-display mt-4 overflow-hidden pb-[0.06em] text-[clamp(52px,11vw,168px)] text-linen">
++            <h1 className="rise t-display mt-4 overflow-hidden pb-[0.06em] text-[clamp(48px,8vw,112px)] text-linen">
+               <span style={{ animationDelay: '80ms' }}>Coffee.</span>
+               <span style={{ animationDelay: '220ms' }}>Community.</span>
+               <span style={{ animationDelay: '360ms' }} className="text-sand">
+@@ -57,18 +51,17 @@ function Home() {
+             >
+               <p className="t-lead max-w-md text-linen/85">
+                 <em className="not-italic text-sand">Blassa</em> is Darija for the
+-                place. Ours opens at eight, empties by four, and sells the shirts
+-                off our own backs.
++                place. Coffee, clothing, and a little time together.
+               </p>
+               <div className="flex flex-wrap gap-3">
+-                <Link to="/shop" className="btn btn-light">
+-                  Capsule 01
++                <Link to="/" hash="menu" className="btn btn-light">
++                  View menu
+                 </Link>
+                 <Link
+                   to="/visit"
+                   className="btn border-linen/40 text-linen hover:bg-linen hover:text-espresso"
+                 >
+-                  Find the room
++                  Visit us
+                 </Link>
+               </div>
+             </div>
+@@ -76,245 +69,26 @@ function Home() {
+         </div>
+       </section>
+ 
+-      <Marquee
+-        className="bg-cream"
+-        items={[
+-          'Coffee',
+-          'Community',
+-          'Clothing',
+-          `${site.address.neighbourhood}`,
+-          'Open at eight',
+-        ]}
+-      />
+-
+-      {/* ── The story ──────────────────────────────────────────── */}
+-      <section className="mt-20 md:mt-32">
+-        <Container>
+-          <SectionHead index="01" label="The story" aside="Since 2025" />
+-
+-          <div className="mt-10 grid gap-12 lg:grid-cols-12 lg:gap-10">
+-            <Reveal className="lg:col-span-7">
+-              <h2 className="t-display text-[clamp(34px,4.6vw,72px)]">
+-                We wanted somewhere to sit that did not want us to leave.
+-              </h2>
+-              <div className="mt-8 grid gap-5 md:grid-cols-2 md:gap-8">
+-                <p className="t-body">
+-                  Blassa began as an argument about chairs. Two of us had spent
+-                  years in rooms designed to move people through — hard seats,
+-                  loud rooms, a cup you were expected to finish standing up. We
+-                  wanted the opposite: a room built for the third hour, not the
+-                  first ten minutes.
+-                </p>
+-                <p className="t-body">
+-                  So we found a corner unit in {site.address.neighbourhood} with
+-                  bad plumbing and good light, put a long table in the middle of
+-                  it, and started roasting with friends. The clothing arrived
+-                  later and by accident — people kept asking where the staff
+-                  shirts came from.
+-                </p>
+-              </div>
+-
+-              <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-8 border-t border-ink/12 pt-7 sm:grid-cols-4">
+-                {[
+-                  { value: '2025', label: 'Doors opened' },
+-                  { value: '11', label: 'Regulars before eight' },
+-                  { value: '120', label: 'Of each garment' },
+-                  { value: '19', label: 'Cups broken' },
+-                ].map((stat) => (
+-                  <div key={stat.label}>
+-                    <dt className="t-label text-ink-faint">{stat.label}</dt>
+-                    <dd className="t-display mt-2 text-[clamp(28px,3vw,44px)]">
+-                      {stat.value}
+-                    </dd>
+-                  </div>
+-                ))}
+-              </dl>
+-            </Reveal>
+-
+-            <Reveal delay={120} className="lg:col-span-5 lg:pt-14">
+-              <Figure
+-                photo="spaceCounter"
+-                ratio="portrait"
+-                caption="The counter, lowered eighty centimetres so you can watch the shots being pulled."
+-                index="Fig. 01"
+-                sizes="(min-width: 1024px) 38vw, 100vw"
+-              />
+-            </Reveal>
+-          </div>
+-        </Container>
+-      </section>
+-
+-      {/* ── The brand ──────────────────────────────────────────── */}
+-      <section className="mt-24 md:mt-36">
+-        <Container>
+-          <SectionHead index="02" label="The brand" aside={collection.season} />
+-
+-          <div className="mt-10 grid gap-12 lg:grid-cols-12 lg:gap-10">
+-            <Reveal className="lg:col-span-6">
+-              <h2 className="t-display text-[clamp(34px,4.6vw,72px)]">
+-                Clothes cut for the people already in the room.
+-              </h2>
+-              <p className="t-body mt-8">
+-                The brand started as staff aprons and got out of hand in the best
+-                way. Everything is drawn around an eight-hour shift behind a
+-                counter: boxy bodies, deep pockets, cloth that is allowed to fade
+-                honestly at the elbows and the cuffs.
+-              </p>
+-              <p className="t-body mt-5">
+-                Undyed or naturally pigmented — bone, sage, clay, terracotta. The
+-                palette came straight out of the café: the tiles behind the
+-                counter, the paper cups, the mint on the windowsill. Runs of 120,
+-                made in Porto, Bologna and Kraków, and no restocks.
+-              </p>
+-
+-              <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-8 border-t border-ink/12 pt-7 sm:grid-cols-3">
+-                {[
+-                  { value: '6', label: 'Pieces in the capsule' },
+-                  { value: '120', label: 'Of each, then gone' },
+-                  { value: '3', label: 'Workshops, three countries' },
+-                ].map((stat) => (
+-                  <div key={stat.label}>
+-                    <dt className="t-label text-ink-faint">{stat.label}</dt>
+-                    <dd className="t-display mt-2 text-[clamp(28px,3vw,44px)]">
+-                      {stat.value}
+-                    </dd>
+-                  </div>
+-                ))}
+-              </dl>
+-
+-              <div className="mt-9 flex flex-wrap gap-3">
+-                <Link to="/shop" className="btn btn-solid">
+-                  See the capsule
+-                </Link>
+-              </div>
+-            </Reveal>
+-
+-            <Reveal delay={110} className="lg:col-span-6">
+-              <Figure
+-                photo="clothingRack"
+-                ratio="slab"
+-                caption="The rack by the window. One hundred and twenty of each, then the hanger stays empty."
+-                index="Fig. 02"
+-                width={1200}
+-                sizes="(min-width: 1024px) 46vw, 100vw"
+-              />
+-            </Reveal>
+-          </div>
+-        </Container>
+-      </section>
+-
+-      {/* ── The community ──────────────────────────────────────── */}
+-      <section className="mt-24 md:mt-36">
+-        <Container>
+-          <SectionHead
+-            index="03"
+-            label="The community"
+-            aside="Everyone at one table"
+-          />
+-
+-          <div className="mt-10 grid gap-12 lg:grid-cols-12 lg:gap-10">
+-            <Reveal className="lg:col-span-5">
+-              <Figure
+-                photo="spaceTable"
+-                ratio="slab"
+-                caption="The long table, most mornings. It fills before the two-seaters do."
+-                index="Fig. 03"
+-                width={1200}
+-                sizes="(min-width: 1024px) 40vw, 100vw"
+-              />
+-            </Reveal>
+-
+-            <Reveal delay={110} className="lg:col-span-7 lg:pt-6">
+-              <h2 className="t-display text-[clamp(34px,4.6vw,72px)]">
+-                The room only works because of who is in it.
+-              </h2>
+-              <p className="t-body mt-8 max-w-xl">
+-                Eleven people through the door before eight, most of them by name.
+-                A long table in the middle that strangers end up sharing, a shelf
+-                of books nobody has catalogued, and a rule we keep to: nobody gets
+-                moved on for sitting too long.
+-              </p>
+ 
+-              <dl className="mt-9 grid gap-x-8 gap-y-7 sm:grid-cols-2">
+-                {[
+-                  {
+-                    term: 'Cupping table',
+-                    detail:
+-                      'First Wednesday of the month, 18:00. Free, no booking — the roaster brings whatever landed that week.',
+-                  },
+-                  {
+-                    term: 'Mending afternoons',
+-                    detail:
+-                      'Bring anything of ours through at the elbow and we will get it darned. Bring anything else and we will try.',
+-                  },
+-                  {
+-                    term: 'The long table',
+-                    detail:
+-                      'Shared by default. Sundays it belongs to whoever gets there first and stays longest.',
+-                  },
+-                  {
+-                    term: 'Sound and wifi',
+-                    detail:
+-                      'Records until eleven, then quiet. Wifi on the chalkboard, no password on the door.',
+-                  },
+-                ].map((item) => (
+-                  <div key={item.term} className="border-t border-ink/12 pt-4">
+-                    <dt className="t-label">{item.term}</dt>
+-                    <dd className="t-body mt-2.5 text-[14px]">{item.detail}</dd>
+-                  </div>
+-                ))}
+-              </dl>
+-            </Reveal>
+-          </div>
+-        </Container>
+-      </section>
+-
+-      {/* ── The coffee ─────────────────────────────────────────── */}
+-      <section className="mt-24 md:mt-36">
++      <section className="mt-16 md:mt-24">
+         <Container>
+-          <SectionHead index="04" label="The coffee" aside="Two origins" />
+-          <div className="mt-10 grid gap-12 lg:grid-cols-12 lg:gap-10">
+-            <Reveal className="lg:col-span-6">
+-              <h2 className="t-display text-[clamp(34px,4.6vw,72px)]">
+-                {coffeeStory.heading}
+-              </h2>
+-              {coffeeStory.body.map((paragraph) => (
+-                <p key={paragraph.slice(0, 24)} className="t-body mt-5">
+-                  {paragraph}
+-                </p>
+-              ))}
+-              <dl className="mt-9 flex flex-wrap gap-x-10 gap-y-6">
+-                {coffeeStory.facts.map((fact) => (
+-                  <div key={fact.label} className="min-w-[7rem]">
+-                    <dd className="t-display text-[clamp(26px,2.6vw,38px)] text-clay">
+-                      {fact.value}
+-                    </dd>
+-                    <dt className="t-label mt-1.5 text-ink-faint">
+-                      {fact.label}
+-                    </dt>
+-                  </div>
+-                ))}
+-              </dl>
++          <div className="grid items-center gap-8 md:grid-cols-2 md:gap-16">
++            <Reveal>
++              <Frame photo="spaceCounter" ratio="wide" width={1200} sizes="(min-width: 768px) 46vw, 100vw" />
+             </Reveal>
+-
+-            <Reveal delay={100} className="lg:col-span-6">
+-              <Figure
+-                photo="coffeePourOver"
+-                ratio="slab"
+-                caption="Two origins on the bar at a time. Whatever the roaster has, poured the slow way."
+-                index="Fig. 04"
+-                width={1200}
+-                sizes="(min-width: 1024px) 46vw, 100vw"
+-              />
++            <Reveal>
++              <p className="t-label text-ink-faint">The place</p>
++              <h2 className="t-display mt-4 text-[clamp(34px,4vw,56px)]">Come for a coffee. Stay for a while.</h2>
++              <p className="t-body mt-5 max-w-lg">A shared table, a good cup, and familiar faces. BLASSA brings coffee, community, and clothing together in one welcoming space.</p>
++              <Link to="/visit" className="btn btn-ghost mt-6">Plan your visit</Link>
+             </Reveal>
+           </div>
+         </Container>
+       </section>
+-
+       {/* ── The menu ───────────────────────────────────────────── */}
+-      <section id="menu" className="mt-24 scroll-mt-28 md:mt-36">
++      <section id="menu" className="mt-16 scroll-mt-28 md:mt-24">
+         <Container>
+-          <SectionHead index="05" label="The menu" aside="Prices in euro" />
++          <SectionHead label="The menu" aside="Prices in euro" />
+           <div className="mt-10 grid gap-12 lg:grid-cols-12 lg:gap-10">
+             <Reveal className="lg:col-span-4">
+               <h3 className="t-heading text-[26px]">On the bar</h3>
+@@ -354,20 +128,15 @@ function Home() {
+                   </li>
+                 ))}
+               </ul>
+-              <p className="t-body mt-5 text-[13px]">
+-                Bring your own cup and take fifty cents off anything on the bar.
+-              </p>
+               <Link to="/visit" className="btn btn-ghost mt-6">
+                 Hours + map
+               </Link>
+             </Reveal>
+ 
+             <Reveal delay={170} className="lg:col-span-4">
+-              <Figure
++              <Frame
+                 photo="coffeeToast"
+                 ratio="portrait"
+-                caption="Two for the road, most mornings at half past eight."
+-                index="Fig. 05"
+                 width={900}
+                 sizes="(min-width: 1024px) 30vw, 100vw"
+               />
+@@ -376,84 +145,36 @@ function Home() {
+         </Container>
+       </section>
+ 
+-      {/* ── Latest journal ────────────────────────────────────── */}
+-      {leadPost ? (
+-        <section className="mt-24 md:mt-36">
+-          <Container>
+-            <SectionHead
+-              index="06"
+-              label="Latest from the journal"
+-              aside={
+-                <Link to="/journal" className="link-rule">
+-                  All entries
+-                </Link>
+-              }
+-            />
+-
+-            <div className="mt-10 grid gap-10 lg:grid-cols-12 lg:gap-10">
+-              <Reveal className="lg:col-span-7">
+-                <Link
+-                  to="/journal/$slug"
+-                  params={{ slug: leadPost.slug }}
+-                  className="group block"
+-                >
+-                  <Frame
+-                    photo={leadPost.photo}
+-                    ratio="wide"
+-                    zoom
+-                    width={1400}
+-                    sizes="(min-width: 1024px) 56vw, 100vw"
+-                  />
+-                  <p className="t-label mt-5 text-ink-faint">
+-                    {leadPost.categories.join(' · ')} — {formatDate(leadPost.date)}
+-                  </p>
+-                  <h3 className="t-heading mt-3 text-[clamp(26px,3vw,42px)]">
+-                    {leadPost.title}
+-                  </h3>
+-                  <p className="t-body mt-3 max-w-xl">{leadPost.summary}</p>
+-                  <span className="t-label link-rule mt-5 inline-block text-clay">
+-                    Read — {leadPost.readingMinutes} min
+-                  </span>
+-                </Link>
+-              </Reveal>
+ 
+-              <div className="grid gap-8 self-start lg:col-span-5 lg:pt-4">
+-                {otherPosts.map((post, i) => (
+-                  <Reveal key={post.slug} delay={100 + i * 90}>
+-                    <Link
+-                      to="/journal/$slug"
+-                      params={{ slug: post.slug }}
+-                      className="group grid grid-cols-[92px_1fr] gap-5 border-t border-ink/12 pt-5 sm:grid-cols-[128px_1fr]"
+-                    >
+-                      <Frame
+-                        photo={post.photo}
+-                        ratio="square"
+-                        radius="card"
+-                        zoom
+-                        width={400}
+-                        sizes="128px"
+-                      />
+-                      <div>
+-                        <p className="t-label text-ink-faint">
+-                          {formatDate(post.date)}
+-                        </p>
+-                        <h3 className="t-heading mt-2 text-[19px]">
+-                          {post.title}
+-                        </h3>
+-                        <p className="t-body mt-2 line-clamp-2 text-[13px]">
+-                          {post.summary}
+-                        </p>
+-                      </div>
+-                    </Link>
+-                  </Reveal>
+-                ))}
+-              </div>
+-            </div>
+-          </Container>
+-        </section>
+-      ) : null}
++      <section className="mt-16 md:mt-24">
++        <Container>
++          <div className="grid items-center gap-8 md:grid-cols-2 md:gap-16">
++            <Reveal>
++              <p className="t-label text-ink-faint">Clothing</p>
++              <h2 className="t-display mt-4 text-[clamp(34px,4vw,56px)]">A little BLASSA to take with you.</h2>
++              <p className="t-body mt-5 max-w-lg">Explore the collection, from everyday tees to your next favourite layer.</p>
++              <Link to="/shop" className="btn btn-solid mt-6">Explore the shop</Link>
++            </Reveal>
++            <Reveal>
++              <Frame photo="clothingRack" ratio="wide" width={1200} sizes="(min-width: 768px) 46vw, 100vw" />
++            </Reveal>
++          </div>
++        </Container>
++      </section>
+ 
+       <InstagramFeed />
++
++      <section className="mt-16 md:mt-24">
++        <Container>
++          <div className="flex flex-col gap-6 border-t border-ink/15 pt-8 md:flex-row md:items-center md:justify-between">
++            <div>
++              <h2 className="t-display text-[clamp(32px,4vw,52px)]">See you at BLASSA.</h2>
++              <p className="t-body mt-3">{site.address.street}, {site.address.city}</p>
++            </div>
++            <Link to="/visit" className="btn btn-solid self-start md:self-auto">Opening hours &amp; directions</Link>
++          </div>
++        </Container>
++      </section>
+     </>
+   )
+ }
+diff --git a/src/routes/shop.index.tsx b/src/routes/shop.index.tsx
+index 424fc6f..818dabf 100644
+--- a/src/routes/shop.index.tsx
++++ b/src/routes/shop.index.tsx
+@@ -1,33 +1,15 @@
+ import { createFileRoute } from '@tanstack/react-router'
+ 
+-import { Figure } from '@/components/media'
+-import { PhotoMarquee } from '@/components/photo-marquee'
+ import { PieceCard } from '@/components/piece-card'
+ import { Reveal } from '@/components/reveal'
+-import { Container, SectionHead } from '@/components/ui/primitives'
++import { Container } from '@/components/ui/primitives'
+ import { collection } from '@/data/collection'
+-import type { PhotoKey } from '@/data/photos'
+ import { site } from '@/data/site'
+ 
+-/** Gallery ribbon — the capsule worn and shot in the room, on a loop. */
+-const galleryTop: PhotoKey[] = [
+-  'clothingRack',
+-  'clothingTee',
+-  'spaceGreenRoom',
+-  'clothingSage',
+-  'coffeeShadow',
+-  'clothingBomber',
+-  'spaceCounter',
+-  'clothingKnitFlatlay',
+-  'clothingWorn',
+-  'spaceLounge',
+-  'clothingStore',
+-]
+-
+ export const Route = createFileRoute('/shop/')({
+   head: () => ({
+     meta: [
+-      { title: `Shop — ${collection.name} — ${site.name}` },
++      { title: `Shop | ${collection.name} | ${site.name}` },
+       { name: 'description', content: collection.intro },
+     ],
+   }),
+@@ -35,123 +17,20 @@ export const Route = createFileRoute('/shop/')({
+ })
+ 
+ function Shop() {
+-  const [first, second, ...rest] = collection.pieces
+-
+   return (
+-    <>
+-      {/* ── Masthead ───────────────────────────────────────────── */}
+-      <section className="pt-28 md:pt-36">
+-        <Container>
+-          <div className="grid gap-10 lg:grid-cols-12 lg:gap-10">
+-            <div className="lg:col-span-7">
+-              <p className="t-label text-ink-faint">
+-                {collection.season} — {collection.pieces.length} pieces
+-              </p>
+-              <h1 className="t-display mt-5 text-[clamp(46px,8.5vw,142px)]">
+-                {collection.name}
+-              </h1>
+-            </div>
+-            <div className="lg:col-span-5 lg:pt-24">
+-              <p className="t-lead">{collection.intro}</p>
+-              {collection.body.map((paragraph) => (
+-                <p key={paragraph.slice(0, 24)} className="t-body mt-5">
+-                  {paragraph}
+-                </p>
+-              ))}
+-            </div>
+-          </div>
+-        </Container>
+-      </section>
+-
+-      {/* ── Editorial opener: two pieces at different scales ───── */}
+-      <section className="mt-16 md:mt-24">
+-        <Container>
+-          <div className="grid gap-6 md:grid-cols-12 md:gap-8">
+-            <Reveal className="md:col-span-7">
+-              <Figure
+-                photo="clothingRack"
+-                ratio="wide"
+-                caption="The full rail, hung in the order it was cut. Bone, sage, terracotta, clay, tobacco."
+-                index="Capsule 01"
+-                width={1600}
+-                sizes="(min-width: 768px) 56vw, 100vw"
+-              />
++    <section className="pt-28 md:pt-36">
++      <Container>
++        <p className="t-label text-ink-faint">{collection.season} · {collection.pieces.length} pieces</p>
++        <h1 className="t-display mt-4 text-[clamp(42px,6vw,80px)]">{collection.name}</h1>
++        <p className="t-body mt-5 max-w-xl">Everyday pieces in the colours of the café. Find your favourite and make it your own.</p>
++        <div className="mt-10 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 md:gap-x-8">
++          {collection.pieces.map((piece, index) => (
++            <Reveal key={piece.slug} delay={(index % 3) * 60}>
++              <PieceCard piece={piece} index={index} ratio="portrait" sizes="(min-width: 1024px) 30vw, (min-width: 640px) 46vw, 100vw" />
+             </Reveal>
+-            <Reveal delay={110} className="md:col-span-5 md:pt-16">
+-              <Figure
+-                photo="clothingKnitFlatlay"
+-                ratio="slab"
+-                caption="Terracotta was the hardest colour to hit twice. This is the third yarn lot."
+-                index="Fig. 02"
+-                width={1100}
+-                sizes="(min-width: 768px) 40vw, 100vw"
+-              />
+-            </Reveal>
+-          </div>
+-        </Container>
+-      </section>
+-
+-      {/* ── The pieces ─────────────────────────────────────────── */}
+-      <section className="mt-24 md:mt-32">
+-        <Container>
+-          <SectionHead
+-            index="01"
+-            label="The pieces"
+-            aside="Runs of 120 — no restocks"
+-          />
+-
+-          {/* Asymmetric grid: the first two run large, the rest fall
+-              into a three-up rhythm below. */}
+-          <div className="mt-10 grid gap-x-6 gap-y-14 md:grid-cols-2 md:gap-x-8">
+-            {first ? (
+-              <Reveal>
+-                <PieceCard
+-                  piece={first}
+-                  index={0}
+-                  ratio="slab"
+-                  sizes="(min-width: 768px) 46vw, 100vw"
+-                />
+-              </Reveal>
+-            ) : null}
+-            {second ? (
+-              <Reveal delay={100} className="md:pt-16">
+-                <PieceCard
+-                  piece={second}
+-                  index={1}
+-                  ratio="slab"
+-                  sizes="(min-width: 768px) 46vw, 100vw"
+-                />
+-              </Reveal>
+-            ) : null}
+-          </div>
+-
+-          <div className="mt-14 grid gap-x-6 gap-y-14 sm:grid-cols-2 md:gap-x-8 lg:grid-cols-4">
+-            {rest.map((piece, i) => (
+-              <Reveal key={piece.slug} delay={i * 90}>
+-                <PieceCard
+-                  piece={piece}
+-                  index={i + 2}
+-                  ratio="portrait"
+-                  sizes="(min-width: 1024px) 22vw, (min-width: 640px) 46vw, 100vw"
+-                />
+-              </Reveal>
+-            ))}
+-          </div>
+-        </Container>
+-      </section>
+-
+-      {/* ── Gallery ────────────────────────────────────────────── */}
+-      <section className="mt-24 md:mt-32">
+-        <Container>
+-          <SectionHead index="02" label="Gallery" aside="Capsule 01, in use" />
+-        </Container>
+-
+-        {/* One ribbon drifting right — full-bleed, so it runs past the
+-            container on both sides. */}
+-        <div className="mt-8 md:mt-10">
+-          <PhotoMarquee photos={galleryTop} seconds={72} />
++          ))}
+         </div>
+-      </section>
+-    </>
++      </Container>
++    </section>
+   )
+ }
+diff --git a/src/routes/visit.tsx b/src/routes/visit.tsx
+index d53499e..6e2da2a 100644
+--- a/src/routes/visit.tsx
++++ b/src/routes/visit.tsx
+@@ -179,7 +179,7 @@ function Visit() {
+                         {isToday ? (
+                           <span className="t-label ml-3 text-clay">Today</span>
+                         ) : null}
+-                        {row.note ? (
++                        {'note' in row && row.note ? (
+                           <span className="mt-1 block text-[12px] text-ink-faint">
+                             {row.note}
+                           </span>
+diff --git a/tsconfig.json b/tsconfig.json
+index 477479f..4fee9c7 100644
+--- a/tsconfig.json
++++ b/tsconfig.json
+@@ -22,7 +22,8 @@
+     "noUncheckedSideEffectImports": true,
+     "baseUrl": ".",
+     "paths": {
+-      "@/*": ["./src/*"]
++      "@/*": ["./src/*"],
++      "content-collections": ["./.content-collections/generated"]
+     }
+   }
+ }
