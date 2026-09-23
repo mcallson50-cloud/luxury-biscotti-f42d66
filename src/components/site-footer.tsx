@@ -1,28 +1,24 @@
 import { Link } from '@tanstack/react-router'
 
-import { NewsletterForm } from '@/components/newsletter-form'
 import { nav, site } from '@/data/site'
 
 export function SiteFooter() {
   return (
-    <footer className="mt-24 border-t border-ink/12 bg-cream md:mt-32">
-      <div className="mx-auto max-w-[1560px] px-5 py-14 md:px-10 md:py-20">
-        <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
-          <div className="lg:col-span-5">
+    <footer className="mt-16 border-t border-ink/12 bg-cream md:mt-24">
+      <div className="mx-auto max-w-[1560px] px-5 py-10 md:px-10 md:py-12">
+        <div className="grid gap-8 md:grid-cols-3 md:gap-10">
+          <div>
             <p className="t-label text-ink-faint">{site.tagline}</p>
-            <p className="t-display mt-5 max-w-[9ch] text-[clamp(56px,9vw,116px)]">
+            <p className="t-display mt-4 text-[48px]">
               Blassa
             </p>
-            <p className="t-body mt-5 max-w-sm">
-              Blassa is Darija for <em>the place</em>. Ours is on{' '}
-              {site.address.street} in {site.address.neighbourhood} — open early,
-              quiet by four, full of the same faces.
-            </p>
+
           </div>
 
-          <div className="lg:col-span-2 lg:col-start-7">
+          <div>
             <h2 className="t-label text-ink-faint">Pages</h2>
             <ul className="mt-4 grid gap-2.5">
+              <li><Link to="/" hash="menu" className="link-rule text-[15px]">Menu</Link></li>
               {nav.map((item) => (
                 <li key={item.to}>
                   <Link to={item.to} className="link-rule text-[15px]">
@@ -33,7 +29,7 @@ export function SiteFooter() {
             </ul>
           </div>
 
-          <div className="lg:col-span-2">
+          <div>
             <h2 className="t-label text-ink-faint">Find us</h2>
             <address className="mt-4 grid gap-2.5 text-[15px] not-italic">
               <span>
@@ -58,16 +54,9 @@ export function SiteFooter() {
             </address>
           </div>
 
-          <div className="lg:col-span-3">
-            <h2 className="t-label text-ink-faint">Once a month, at most</h2>
-            <p className="t-body mt-4 text-[14px]">
-              New drops, workshop dates, and whichever filter is on the bar.
-            </p>
-            <NewsletterForm />
-          </div>
         </div>
 
-        <div className="mt-14 flex flex-col-reverse gap-4 border-t border-ink/12 pt-6 md:flex-row md:items-center md:justify-between">
+        <div className="mt-8 flex flex-col-reverse gap-4 border-t border-ink/12 pt-6 md:flex-row md:items-center md:justify-between">
           <p className="t-label text-ink-faint">
             © {new Date().getFullYear()} {site.name}
           </p>

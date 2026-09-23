@@ -179,7 +179,7 @@ function Visit() {
                         {isToday ? (
                           <span className="t-label ml-3 text-clay">Today</span>
                         ) : null}
-                        {row.note ? (
+                        {'note' in row && row.note ? (
                           <span className="mt-1 block text-[12px] text-ink-faint">
                             {row.note}
                           </span>

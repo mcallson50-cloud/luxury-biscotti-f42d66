@@ -4,15 +4,7 @@ import { useEffect, useState } from 'react'
 import { nav, site } from '@/data/site'
 import { cn } from '@/lib/utils'
 
-/**
- * Fixed header. Transparent over hero media, then settles onto cream once the
- * page scrolls. Two elements only: the wordmark set large and centred, and a
- * three-dot trigger on the right that opens the full menu at every breakpoint.
- *
- * The row is a 1fr/auto/1fr grid rather than a flex row: the empty left cell
- * mirrors the trigger's width, so the wordmark sits on the true centre of the
- * page instead of the centre of the space left over beside the button.
- */
+/** Visible desktop navigation with a compact mobile menu. */
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
@@ -44,6 +36,13 @@ export function SiteHeader() {
     return () => window.removeEventListener('keydown', onKey)
   }, [open])
 
+  useEffect(() => {
+    const desktop = window.matchMedia('(min-width: 768px)')
+    const closeOnDesktop = () => { if (desktop.matches) setOpen(false) }
+    desktop.addEventListener('change', closeOnDesktop)
+    return () => desktop.removeEventListener('change', closeOnDesktop)
+  }, [])
+
   // Only the home page puts dark hero video behind the header. Everywhere else
   // the top of the page is cream, so the wordmark and dots stay ink.
   const overMedia = pathname === '/' && !scrolled && !open
@@ -58,13 +57,12 @@ export function SiteHeader() {
           : 'bg-transparent',
       )}
     >
-      <div className="mx-auto grid max-w-[1560px] grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 py-4 md:px-10 md:py-5">
-        <span aria-hidden />
+      <div className="mx-auto flex max-w-[1560px] justify-between items-center gap-4 px-5 py-4 md:px-10 md:py-5">
 
         <Link
           to="/"
           className={cn(
-            'wordmark justify-self-center text-center text-[clamp(21px,4.4vw,46px)] transition-colors duration-700',
+            'wordmark justify-self-center text-center text-[clamp(24px,3vw,38px)] transition-colors duration-700',
             onCream ? 'text-ink' : 'text-linen',
           )}
           aria-label={`${site.name} — home`}
@@ -72,15 +70,22 @@ export function SiteHeader() {
           {site.name}
         </Link>
 
-        {/* Three dots — the only control up here. */}
+        <nav aria-label="Primary" className={cn('hidden items-center gap-8 md:flex', onCream ? 'text-ink' : 'text-linen')}>
+          {nav.map((item) => (
+            <Link key={item.to} to={item.to} className="t-label link-rule py-2" activeProps={{ 'aria-current': 'page' }} activeOptions={{ exact: true }}>{item.label}</Link>
+          ))}
+          <Link to="/" hash="menu" className="t-label link-rule py-2">Menu</Link>
+        </nav>
+
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          className="-mr-2 flex h-11 w-11 shrink-0 items-center justify-center justify-self-end"
+          className={cn("flex h-11 items-center gap-2 px-2 text-sm md:hidden", onCream ? "text-ink" : "text-linen")}
           aria-expanded={open}
           aria-controls="site-menu"
           aria-label={open ? 'Close menu' : 'Open menu'}
         >
+          <span>{open ? 'Close' : 'Menu'}</span>
           <span aria-hidden className="flex flex-col items-center gap-[5px]">
             {[0, 1, 2].map((i) => (
               <span
@@ -99,23 +104,23 @@ export function SiteHeader() {
       <div
         id="site-menu"
         hidden={!open}
-        className="border-t border-ink/10 bg-cream px-5 pt-6 pb-9 md:px-10 md:pt-8 md:pb-12"
+        className="border-t border-ink/10 bg-cream px-5 pt-4 pb-6 md:hidden"
       >
-        <nav className="grid gap-1" aria-label="Primary">
+        <nav className="grid gap-1" aria-label="Mobile navigation">
+          <Link to="/" hash="menu" onClick={() => setOpen(false)} className="t-display border-b border-ink/8 py-3.5 text-[34px]">View menu</Link>
           {nav.map((item) => (
             <Link
               key={item.to}
               to={item.to}
-              className="t-display border-b border-ink/8 py-3.5 text-[clamp(34px,6vw,68px)]"
+              onClick={() => setOpen(false)}
+              className="t-display border-b border-ink/8 py-3.5 text-[34px]"
             >
               {item.label}
             </Link>
           ))}
         </nav>
         <div className="mt-7 flex flex-wrap items-center gap-4">
-          <Link to="/shop" className="btn btn-solid">
-            Shop the capsule
-          </Link>
+
           <a
             href={site.social.instagram}
             target="_blank"
