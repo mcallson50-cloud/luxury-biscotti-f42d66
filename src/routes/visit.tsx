@@ -127,7 +127,6 @@ function Visit() {
       <section className="mt-20 md:mt-28">
         <Container>
           <SectionHead
-            index="01"
             label="Opening hours"
             aside={today ? `Today — ${today}` : 'Saturday to Thursday'}
           />
@@ -199,7 +198,7 @@ function Visit() {
       {/* ── Contact ────────────────────────────────────────────── */}
       <section className="mt-24 md:mt-32">
         <Container>
-          <SectionHead index="02" label="Write to us" aside="We reply in a day or two" />
+          <SectionHead label="Write to us" aside="We reply in a day or two" />
           <div className="mt-10 grid gap-12 lg:grid-cols-12 lg:gap-10">
             <div className="lg:col-span-7">
               <h2 className="t-display max-w-[22ch] text-[clamp(30px,3.8vw,58px)]">
