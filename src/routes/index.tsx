@@ -1,7 +1,7 @@
 import { Link, createFileRoute } from '@tanstack/react-router'
 
 import { InstagramFeed } from '@/components/instagram-feed'
-import { Frame, VideoPanel } from '@/components/media'
+import { Frame } from '@/components/media'
 import { Reveal } from '@/components/reveal'
 import { Container, SectionHead } from '@/components/ui/primitives'
 import { menu } from '@/data/collection'
@@ -12,14 +12,15 @@ export const Route = createFileRoute('/')({ component: Home })
 function Home() {
   return (
     <>
-      {/* ── Hero: the film fills the first screen ──────────────── */}
+      {/* ── Hero: the photograph fills the first screen ─────────── */}
       <section className="relative">
         <div className="relative min-h-[640px] h-[90svh] max-h-[960px] w-full overflow-hidden">
-          <VideoPanel
-            video="/media/hero.mp4"
-            poster="spaceGreenRoom"
+          <Frame
+            photo="heroPicnic"
             ratio="cinema"
             radius="flat"
+            priority
+            drift
             className="absolute inset-0 h-full w-full"
             width={2400}
           />
@@ -75,7 +76,7 @@ function Home() {
         <Container>
           <div className="grid items-center gap-8 md:grid-cols-2 md:gap-16">
             <Reveal>
-              <Frame photo="spaceCounter" ratio="wide" width={1200} sizes="(min-width: 768px) 46vw, 100vw" />
+              <Frame photo="placeShopDog" ratio="tall" width={1200} sizes="(min-width: 768px) 46vw, 100vw" />
             </Reveal>
             <Reveal>
               <p className="t-label text-ink-faint">The place</p>
@@ -136,8 +137,8 @@ function Home() {
 
             <Reveal delay={170} className="lg:col-span-4">
               <Frame
-                photo="coffeeToast"
-                ratio="portrait"
+                photo="menuIcedPour"
+                ratio="tall"
                 width={900}
                 sizes="(min-width: 1024px) 30vw, 100vw"
               />
@@ -157,7 +158,7 @@ function Home() {
               <Link to="/shop" className="btn btn-solid mt-6">Explore the shop</Link>
             </Reveal>
             <Reveal>
-              <Frame photo="clothingRack" ratio="wide" width={1200} sizes="(min-width: 768px) 46vw, 100vw" />
+              <Frame photo="clothingCrew" ratio="wide" width={1200} sizes="(min-width: 768px) 46vw, 100vw" />
             </Reveal>
           </div>
         </Container>
