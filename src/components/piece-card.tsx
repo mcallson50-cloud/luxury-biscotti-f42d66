@@ -12,7 +12,6 @@ const statusLabel: Record<Piece['status'], string | null> = {
 
 export function PieceCard({
   piece,
-  index,
   ratio = 'portrait',
   className,
   sizes,
@@ -59,11 +58,6 @@ export function PieceCard({
       <div className="mt-3.5 flex items-baseline justify-between gap-4 border-t border-ink/12 pt-2.5">
         <div>
           <h3 className="text-[15px] leading-tight">
-            {typeof index === 'number' ? (
-              <span className="mr-2 text-ink-faint">
-                {String(index + 1).padStart(2, '0')}
-              </span>
-            ) : null}
             {piece.name}
           </h3>
           <p className="t-label mt-1.5 text-ink-faint">{piece.colour}</p>

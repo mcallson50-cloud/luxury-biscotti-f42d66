@@ -1,5 +1,5 @@
 ---
-title: "Capsule 01: six pieces, and why not sixty"
+title: "The collection: six pieces, and why not sixty"
 summary: "The collection started as staff uniforms. Then people kept asking where the shirts came from, so we made 120 of each."
 date: "2026-06-19"
 categories:
@@ -31,7 +31,7 @@ We did not build a mood board. We photographed the café at four in the afternoo
 
 Everything is either undyed or pigment-dyed, which means the sage overshirt will fade unevenly at the elbows and cuffs. We had a long argument about whether to warn people about this. We decided to say it plainly instead: it will fade, that is the material being honest about how much you wore it.
 
-## Why 120
+## Why a small run
 
 A run of 120 per piece is small enough that we could pay for it out of the café's own margin, without an investor and without pre-orders. It is also small enough that we can stop. If Capsule 02 does not have a reason to exist, there will not be a Capsule 02 — the next thing we make will be whatever people keep asking us for across the counter.
 

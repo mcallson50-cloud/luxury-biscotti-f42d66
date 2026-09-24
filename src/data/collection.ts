@@ -144,7 +144,7 @@ export const pieces: Piece[] = [
 ]
 
 export const collection = {
-  name: 'Capsule 01 — Blassa',
+  name: 'Blassa Collection',
   season: 'Autumn 2026',
   intro:
     'Six pieces, made in a run of 120. We designed them for the people who are actually in the room: staff pulling shots for eight hours, regulars who sit through a whole afternoon, someone cycling over in the cold for a cortado.',

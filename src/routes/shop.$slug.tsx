@@ -16,7 +16,6 @@ export const Route = createFileRoute('/shop/$slug')({
     return {
       piece: pieces[index],
       next: pieces[(index + 1) % pieces.length],
-      number: index + 1,
     }
   },
   head: ({ loaderData }) => ({
@@ -31,7 +30,7 @@ export const Route = createFileRoute('/shop/$slug')({
 })
 
 function PieceDetail() {
-  const { piece, next, number } = Route.useLoaderData()
+  const { piece, next } = Route.useLoaderData()
   const [size, setSize] = useState<string | null>(null)
 
   const unavailable = piece.status === 'coming-soon'
@@ -44,7 +43,7 @@ function PieceDetail() {
       <Container>
         <nav className="t-label flex items-center gap-2.5 text-ink-faint">
           <Link to="/shop" className="link-rule">
-            Capsule 01
+            Collection
           </Link>
           <span aria-hidden>/</span>
           <span className="text-ink">{piece.name}</span>
@@ -77,7 +76,7 @@ function PieceDetail() {
           <div className="lg:col-span-5">
             <div className="lg:sticky lg:top-28">
               <p className="t-label text-ink-faint">
-                Piece {String(number).padStart(2, '0')} — {piece.colour}
+                {piece.colour}
               </p>
               <h1 className="t-display mt-4 text-[clamp(38px,5vw,76px)]">
                 {piece.name}

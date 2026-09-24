@@ -11,7 +11,9 @@ author: "Blassa Studio"
 
 We have been cupping whatever the roastery drops off on Wednesday mornings for about six months, standing up, in the twenty minutes before opening. Enough people have wandered in mid-slurp and asked what on earth we were doing that we are making it an actual thing.
 
-## First Wednesday of the month, 09:00
+## First Wednesday of the month
+
+Start time: 09:00.
 
 Eight seats around the back table. Free. You do not need to know anything and there is no tasting vocabulary test.
 

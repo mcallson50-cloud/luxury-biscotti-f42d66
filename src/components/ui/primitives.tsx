@@ -26,12 +26,8 @@ export function Container({
   )
 }
 
-/**
- * Section marker: a letter-spaced label above a rule. Numeric markers are hidden; this is
- * the one repeating structural motif across the site.
- */
+/** Section heading with a plain text label above a rule. */
 export function SectionHead({
-  index,
   label,
   aside,
   className,
@@ -49,7 +45,6 @@ export function SectionHead({
       )}
     >
       <h2 className="t-label flex items-baseline gap-3">
-        {index && !/^\d+$/.test(index.trim()) ? <span className="text-ink-faint">{index}</span> : null}
         <span>{label}</span>
       </h2>
       {aside ? <div className="t-label text-ink-faint">{aside}</div> : null}
