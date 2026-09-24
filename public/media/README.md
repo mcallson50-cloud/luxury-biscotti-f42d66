@@ -5,7 +5,6 @@ immediately — no code changes.
 
 | File               | Where it plays                         | Suggested ratio |
 | ------------------ | -------------------------------------- | --------------- |
-| `hero.mp4`         | Home, full-screen hero behind the title | 16:10 or wider |
 | `counter.mp4`      | Visit, under the address block         | 21:9            |
 
 Until a file exists, each slot renders its photographic poster instead, so

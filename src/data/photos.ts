@@ -16,6 +16,30 @@ type Photo = {
 const photo = (id: string, alt: string): Photo => ({ id, alt })
 
 export const photos = {
+  // Home hero
+  heroPicnic: photo(
+    '/media/hero.jpg',
+    'Two friends lying on a white blanket in the grass, one holding an iced drink, the other in a brown Blassa Studio hoodie',
+  ),
+
+  // Home menu
+  menuIcedPour: photo(
+    '/media/menu.jpg',
+    'Espresso poured from a steel pitcher into an iced milk coffee in a Blassa cup tucked into a jeans pocket',
+  ),
+
+  // Home clothing
+  clothingCrew: photo(
+    '/media/clothing.jpg',
+    'Five friends in Blassa tees, a tank top, a hoodie and a lilac sweatshirt on a pink-railed footbridge at dusk',
+  ),
+
+  // Home place
+  placeShopDog: photo(
+    '/media/place.jpg',
+    'A dog lying on the concrete floor of the Blassa café, with the tiled coffee bar, a clothing rail and a record shelf behind',
+  ),
+
   // Café + space
   spaceGreenRoom: photo(
     'photo-1521017432531-fbd92d768814',
