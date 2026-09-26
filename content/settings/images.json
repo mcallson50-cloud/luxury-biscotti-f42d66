@@ -1,0 +1,18 @@
+{
+  "heroPicnic": {
+    "id": "/media/hero.jpg",
+    "alt": "Two friends lying on a white blanket in the grass, one holding an iced drink, the other in a brown Blassa Studio hoodie"
+  },
+  "menuIcedPour": {
+    "id": "/media/menu.jpg",
+    "alt": "Espresso poured from a steel pitcher into an iced milk coffee in a Blassa cup tucked into a jeans pocket"
+  },
+  "clothingCrew": {
+    "id": "/media/clothing.jpg",
+    "alt": "Five friends in Blassa tees, a tank top, a hoodie and a lilac sweatshirt on a pink-railed footbridge at dusk"
+  },
+  "placeShopDog": {
+    "id": "/media/place.jpg",
+    "alt": "A dog lying on the concrete floor of the Blassa caf\u00e9, with the tiled coffee bar, a clothing rail and a record shelf behind"
+  }
+}

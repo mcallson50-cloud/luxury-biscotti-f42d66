@@ -1,3 +1,5 @@
+import images from '../../content/settings/images.json'
+
 /**
  * Image sources.
  *
@@ -17,28 +19,16 @@ const photo = (id: string, alt: string): Photo => ({ id, alt })
 
 export const photos = {
   // Home hero
-  heroPicnic: photo(
-    '/media/hero.jpg',
-    'Two friends lying on a white blanket in the grass, one holding an iced drink, the other in a brown Blassa Studio hoodie',
-  ),
+  heroPicnic: images.heroPicnic,
 
   // Home menu
-  menuIcedPour: photo(
-    '/media/menu.jpg',
-    'Espresso poured from a steel pitcher into an iced milk coffee in a Blassa cup tucked into a jeans pocket',
-  ),
+  menuIcedPour: images.menuIcedPour,
 
   // Home clothing
-  clothingCrew: photo(
-    '/media/clothing.jpg',
-    'Five friends in Blassa tees, a tank top, a hoodie and a lilac sweatshirt on a pink-railed footbridge at dusk',
-  ),
+  clothingCrew: images.clothingCrew,
 
   // Home place
-  placeShopDog: photo(
-    '/media/place.jpg',
-    'A dog lying on the concrete floor of the Blassa café, with the tiled coffee bar, a clothing rail and a record shelf behind',
-  ),
+  placeShopDog: images.placeShopDog,
 
   // Café + space
   spaceGreenRoom: photo(

@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.netlify/
+.content-collections/
+.env
+.env.*
+!.env.example
+tina/__generated__/
+public/admin/

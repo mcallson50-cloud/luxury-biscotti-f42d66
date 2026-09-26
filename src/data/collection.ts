@@ -1,3 +1,4 @@
+import menuContent from '../../content/settings/menu.json'
 import type { PhotoKey } from './photos'
 
 /**
@@ -156,21 +157,7 @@ export const collection = {
 }
 
 /** Café menu. Prices in euro, matching the Berlin location. */
-export const menu = {
-  coffee: [
-    { name: 'Espresso', price: '€2.60', note: 'Single or double, same price' },
-    { name: 'Cortado', price: '€3.40', note: 'The house default' },
-    { name: 'Nass-Nass', price: '€3.80', note: 'Half espresso, half hot milk' },
-    { name: 'Filter — single origin', price: '€4.20', note: 'Changes every fortnight' },
-    { name: 'Cardamom latte', price: '€4.60', note: 'Ground fresh, never syrup' },
-    { name: 'Orange blossom cold brew', price: '€4.90', note: 'Summer only' },
-  ],
-  beans: [
-    { name: 'Kerinci — Sumatra, 250g', price: '€15.50', note: 'Washed. Plum, cocoa, tobacco.' },
-    { name: 'Guji — Ethiopia, 250g', price: '€17.20', note: 'Natural. Apricot, jasmine, sherbet.' },
-    { name: 'House blend — 1kg', price: '€44.00', note: 'What the espresso machine runs on.' },
-  ],
-} as const
+export const menu = menuContent
 
 export const coffeeStory = {
   heading: 'We buy small and roast close.',

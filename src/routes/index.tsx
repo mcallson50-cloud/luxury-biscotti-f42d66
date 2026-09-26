@@ -1,3 +1,4 @@
+import home from '../../content/settings/home.json'
 import { Link, createFileRoute } from '@tanstack/react-router'
 
 import { InstagramFeed } from '@/components/instagram-feed'
@@ -39,10 +40,10 @@ function Home() {
             </p>
 
             <h1 className="rise t-display mt-4 overflow-hidden pb-[0.06em] text-[clamp(36px,7vw,96px)] text-linen">
-              <span style={{ animationDelay: '80ms' }}>Culture.</span>
-              <span style={{ animationDelay: '220ms' }}>Café.</span>
+              <span style={{ animationDelay: '80ms' }}>{home.heroLineOne}</span>
+              <span style={{ animationDelay: '220ms' }}>{home.heroLineTwo}</span>
               <span style={{ animationDelay: '360ms' }} className="text-sand">
-                Creative space.
+                {home.heroLineThree}
               </span>
             </h1>
 
@@ -51,8 +52,7 @@ function Home() {
               style={{ animationDelay: '700ms' }}
             >
               <p className="t-lead max-w-md text-linen/85">
-                <em className="not-italic text-sand">Blassa</em> is Darija for the
-                place. Culture, café, and a little time together.
+                {home.heroDescription}
               </p>
               <p className="t-body text-linen">{site.hoursSummary}</p>
               <div className="flex shrink-0 flex-wrap gap-3">
@@ -79,9 +79,9 @@ function Home() {
               <Frame photo="placeShopDog" ratio="tall" width={1200} sizes="(min-width: 768px) 46vw, 100vw" />
             </Reveal>
             <Reveal>
-              <p className="t-label text-ink-faint">The place</p>
-              <h2 className="t-display mt-4 text-[clamp(34px,4vw,56px)]">Come for a coffee. Stay for a while.</h2>
-              <p className="t-body mt-5 max-w-lg">A shared table, a good cup, and familiar faces. BLASSA brings coffee, community, and clothing together in one welcoming space.</p>
+              <p className="t-label text-ink-faint">{home.placeLabel}</p>
+              <h2 className="t-display mt-4 text-[clamp(34px,4vw,56px)]">{home.placeHeading}</h2>
+              <p className="t-body mt-5 max-w-lg">{home.placeDescription}</p>
               <Link to="/visit" className="btn btn-ghost mt-6">Plan your visit</Link>
             </Reveal>
           </div>
@@ -90,7 +90,7 @@ function Home() {
       {/* ── The menu ───────────────────────────────────────────── */}
       <section id="menu" className="mt-16 scroll-mt-28 md:mt-24">
         <Container>
-          <SectionHead label="The menu" aside="Prices in euro" />
+          <SectionHead label="The menu" aside={home.menuCurrencyNote} />
           <div className="mt-10 grid gap-12 lg:grid-cols-12 lg:gap-10">
             <Reveal className="lg:col-span-4">
               <h3 className="t-heading text-[26px]">On the bar</h3>
@@ -152,9 +152,9 @@ function Home() {
         <Container>
           <div className="grid items-center gap-8 md:grid-cols-2 md:gap-16">
             <Reveal>
-              <p className="t-label text-ink-faint">Clothing</p>
-              <h2 className="t-display mt-4 text-[clamp(34px,4vw,56px)]">A little BLASSA to take with you.</h2>
-              <p className="t-body mt-5 max-w-lg">Explore the collection, from everyday tees to your next favourite layer.</p>
+              <p className="t-label text-ink-faint">{home.clothingLabel}</p>
+              <h2 className="t-display mt-4 text-[clamp(34px,4vw,56px)]">{home.clothingHeading}</h2>
+              <p className="t-body mt-5 max-w-lg">{home.clothingDescription}</p>
               <Link to="/shop" className="btn btn-solid mt-6">Explore the shop</Link>
             </Reveal>
             <Reveal>
@@ -170,7 +170,7 @@ function Home() {
         <Container>
           <div className="flex flex-col gap-6 border-t border-ink/15 pt-8 md:flex-row md:items-center md:justify-between">
             <div>
-              <h2 className="t-display text-[clamp(32px,4vw,52px)]">See you at BLASSA.</h2>
+              <h2 className="t-display text-[clamp(32px,4vw,52px)]">{home.visitHeading}</h2>
               <p className="t-body mt-3">{site.locationLabel}</p>
               <p className="t-body mt-2">{site.hoursSummary}</p>
             </div>
