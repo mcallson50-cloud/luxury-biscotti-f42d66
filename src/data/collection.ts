@@ -1,3 +1,4 @@
+import shopContent from '../../content/settings/shop.json'
 import menuContent from '../../content/settings/menu.json'
 import type { PhotoKey } from './photos'
 
@@ -145,10 +146,7 @@ export const pieces: Piece[] = [
 ]
 
 export const collection = {
-  name: 'Blassa Collection',
-  season: 'Autumn 2026',
-  intro:
-    'Six pieces, made in a run of 120. We designed them for the people who are actually in the room: staff pulling shots for eight hours, regulars who sit through a whole afternoon, someone cycling over in the cold for a cortado.',
+  ...shopContent,
   body: [
     'Everything is cut from undyed or naturally pigmented cloth — bone, sage, clay, terracotta. The palette came out of the café itself: the tiles behind the counter, the paper cups, the mint we keep on the windowsill.',
     'We are not trying to release a collection every season. This one exists because we kept being asked where the staff shirts came from. When the run is gone, it is gone, and we will make something else when there is a reason to.',

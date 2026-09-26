@@ -22,6 +22,16 @@ export default defineConfig({
   schema: {
     collections: [
       {
+        name: 'shopPage', label: 'Shop page', path: 'content/settings',
+        format: 'json', match: { include: 'shop' }, ui: singleton,
+        fields: [
+          text('name', 'Collection title'),
+          text('season', 'Season label'),
+          { ...text('intro', 'Introduction'), ui: { component: 'textarea' } },
+          { type: 'boolean', name: 'showPieceCount', label: 'Show product count', description: 'The number is calculated automatically from the products.' },
+        ],
+      },
+      {
         name: 'homepage', label: 'Homepage text', path: 'content/settings',
         format: 'json', match: { include: 'home' }, ui: singleton,
         fields: [
