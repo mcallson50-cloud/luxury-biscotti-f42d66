@@ -2,7 +2,7 @@
   "coffee": [
     {
       "name": "Espresso",
-      "price": "20 dh",
+      "price": "20",
       "note": "Single or double, same price"
     },
     {
