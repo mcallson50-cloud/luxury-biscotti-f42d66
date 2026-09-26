@@ -30,8 +30,8 @@ export const pieces: Piece[] = [
     colour: 'Bone',
     price: '€48',
     status: 'available',
-    photo: 'clothingTee',
-    gallery: ['clothingTee', 'clothingRack', 'spaceCounter'],
+    photo: 'blassaTeeMain',
+    gallery: ['blassaTeeMain', 'blassaTeeGallery2', 'blassaTeeGallery3'],
     summary:
       'The heavyweight tee the counter staff wear. 240gsm, boxy, holds its shape through a hundred washes.',
     story:
@@ -50,8 +50,8 @@ export const pieces: Piece[] = [
     colour: 'Sage',
     price: '€135',
     status: 'available',
-    photo: 'clothingSage',
-    gallery: ['clothingSage', 'spacePlants', 'clothingRack'],
+    photo: 'soukOvershirtMain',
+    gallery: ['soukOvershirtMain', 'soukOvershirtGallery2', 'soukOvershirtGallery3'],
     summary:
       'A linen-cotton overshirt you can wear as a jacket in September and a shirt in November.',
     story:
@@ -70,8 +70,8 @@ export const pieces: Piece[] = [
     colour: 'Terracotta',
     price: '€98',
     status: 'low-stock',
-    photo: 'clothingKnitFlatlay',
-    gallery: ['clothingKnitFlatlay', 'coffeeCortado', 'spaceDesk'],
+    photo: 'nassNassCrewneckMain',
+    gallery: ['nassNassCrewneckMain', 'nassNassCrewneckGallery2', 'nassNassCrewneckGallery3'],
     summary:
       'Ribbed cotton knit named after the half-espresso, half-milk order half our regulars make.',
     story:
@@ -90,8 +90,8 @@ export const pieces: Piece[] = [
     colour: 'Clay',
     price: '€245',
     status: 'available',
-    photo: 'clothingBomber',
-    gallery: ['clothingBomber', 'clothingWorn', 'spaceGreenRoom'],
+    photo: 'zelligeBomberMain',
+    gallery: ['zelligeBomberMain', 'zelligeBomberGallery2', 'zelligeBomberGallery3'],
     summary:
       'The one properly considered piece in the capsule. Cotton-nylon shell, cupro lining, no logo anywhere.',
     story:
@@ -110,8 +110,8 @@ export const pieces: Piece[] = [
     colour: 'Tobacco',
     price: '€180',
     status: 'available',
-    photo: 'clothingWorn',
-    gallery: ['clothingWorn', 'clothingStore', 'spaceLounge'],
+    photo: 'regularsJacketMain',
+    gallery: ['regularsJacketMain', 'regularsJacketGallery2', 'regularsJacketGallery3'],
     summary:
       'An unlined chore jacket in brushed cotton twill. Three pockets, no lining, wears in fast.',
     story:

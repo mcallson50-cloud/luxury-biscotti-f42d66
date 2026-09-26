@@ -1,0 +1,72 @@
+{
+  "blassaTee": {
+    "main": {
+      "id": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&q=72&w=1200",
+      "alt": "Plain heavyweight cotton t-shirt worn straight on, cropped at the shoulders"
+    },
+    "gallery2": {
+      "id": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=72&w=1200",
+      "alt": "A rail of undyed and stone-coloured garments against a white wall"
+    },
+    "gallery3": {
+      "id": "https://images.unsplash.com/photo-1559496417-e7f25cb247f3?auto=format&fit=crop&q=72&w=1200",
+      "alt": "The espresso counter, timber shelving stacked with cups and bags of beans"
+    }
+  },
+  "soukOvershirt": {
+    "main": {
+      "id": "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&q=72&w=1200",
+      "alt": "Sage green shirts hung close together on wooden hangers"
+    },
+    "gallery2": {
+      "id": "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=72&w=1200",
+      "alt": "Warm café interior with hanging plants and mismatched chairs"
+    },
+    "gallery3": {
+      "id": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=72&w=1200",
+      "alt": "A rail of undyed and stone-coloured garments against a white wall"
+    }
+  },
+  "nassNassCrewneck": {
+    "main": {
+      "id": "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&q=72&w=1200",
+      "alt": "Rust-coloured ribbed knit folded beside denim and a wristwatch"
+    },
+    "gallery2": {
+      "id": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&q=72&w=1200",
+      "alt": "Two cappuccinos in dark ceramic cups surrounded by potted herbs"
+    },
+    "gallery3": {
+      "id": "https://images.unsplash.com/photo-1534040385115-33dcb3acba5b?auto=format&fit=crop&q=72&w=1200",
+      "alt": "A corner table by the window with a flat white, an open notebook and reading glasses"
+    }
+  },
+  "zelligeBomber": {
+    "main": {
+      "id": "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=72&w=1200",
+      "alt": "Terracotta bomber jacket held up on a hanger against a pale wall"
+    },
+    "gallery2": {
+      "id": "https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?auto=format&fit=crop&q=72&w=1200",
+      "alt": "Tan jacket worn open over a collared shirt on the street"
+    },
+    "gallery3": {
+      "id": "https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&q=72&w=1200",
+      "alt": "The green-panelled back room of the café, tables laid out along the window"
+    }
+  },
+  "regularsJacket": {
+    "main": {
+      "id": "https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?auto=format&fit=crop&q=72&w=1200",
+      "alt": "Tan jacket worn open over a collared shirt on the street"
+    },
+    "gallery2": {
+      "id": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=72&w=1200",
+      "alt": "Folded garments and shelving in the studio retail corner"
+    },
+    "gallery3": {
+      "id": "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&q=72&w=1200",
+      "alt": "The studio lounge — low chairs, a paper lamp and afternoon light"
+    }
+  }
+}

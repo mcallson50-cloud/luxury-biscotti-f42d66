@@ -6,6 +6,10 @@ const text = (name: string, label: string, required = true) => ({
 const object = (name: string, label: string, fields: TinaField[]): TinaField => ({
   type: 'object', name, label, fields, required: true,
 })
+const imageSlot = (name: string, label: string): TinaField => object(name, label, [
+  { type: 'image', name: 'id', label: 'Photo', required: true },
+  text('alt', 'Photo description for accessibility'),
+])
 const singleton = { allowedActions: { create: false, delete: false } }
 const menuItems = (name: string, label: string): TinaField => ({
   type: 'object', name, label, list: true, required: true,
@@ -21,6 +25,23 @@ export default defineConfig({
   media: { tina: { mediaRoot: 'media', publicFolder: 'public' } },
   schema: {
     collections: [
+      {
+        name: 'shopImages', label: 'Shop photos', path: 'content/settings',
+        format: 'json', match: { include: 'shop-images' }, ui: singleton,
+        fields: [
+          object('blassaTee', "Blassa Tee", [imageSlot('main', 'Main product photo'), imageSlot('gallery2', 'Gallery photo 2'), imageSlot('gallery3', 'Gallery photo 3')]),
+          object('soukOvershirt', "Souk Overshirt", [imageSlot('main', 'Main product photo'), imageSlot('gallery2', 'Gallery photo 2'), imageSlot('gallery3', 'Gallery photo 3')]),
+          object('nassNassCrewneck', "Nass-Nass Crewneck", [imageSlot('main', 'Main product photo'), imageSlot('gallery2', 'Gallery photo 2'), imageSlot('gallery3', 'Gallery photo 3')]),
+          object('zelligeBomber', "Zellige Bomber", [imageSlot('main', 'Main product photo'), imageSlot('gallery2', 'Gallery photo 2'), imageSlot('gallery3', 'Gallery photo 3')]),
+          object('regularsJacket', "Regular's Jacket", [imageSlot('main', 'Main product photo'), imageSlot('gallery2', 'Gallery photo 2'), imageSlot('gallery3', 'Gallery photo 3')]),
+        ],
+      },
+      {
+        name: 'visitImages', label: 'Visit photos', path: 'content/settings',
+        format: 'json', match: { include: 'visit-images' }, ui: singleton,
+        fields: [imageSlot('main', 'Main Visit photo')],
+      },
+
       {
         name: 'shopPage', label: 'Shop page', path: 'content/settings',
         format: 'json', match: { include: 'shop' }, ui: singleton,

@@ -215,7 +215,7 @@ function Visit() {
 
             <div className="lg:col-span-5">
               <Frame
-                photo="spaceDesk"
+                photo="visitMain"
                 ratio="tall"
                 width={1000}
                 sizes="(min-width: 1024px) 38vw, 100vw"
