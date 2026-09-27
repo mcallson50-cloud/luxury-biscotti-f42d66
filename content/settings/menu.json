@@ -51,6 +51,10 @@
       "name": "Syrup Shot   ",
       "price": "5",
       "note": ""
+    },
+    {
+      "name": "Iced",
+      "price": "free"
     }
   ]
 }
