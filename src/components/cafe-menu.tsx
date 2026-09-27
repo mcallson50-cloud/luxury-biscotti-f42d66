@@ -33,7 +33,7 @@ export function CafeMenu() {
                   document.getElementById(`menu-tab-${categories[next].key}`)?.focus()
                 }
               }}
-              className={`btn ${active === i ? 'btn-solid' : 'btn-ghost'}`}>
+              className="btn border-ink/20 bg-transparent text-ink hover:border-ink/40 active:bg-sand aria-selected:bg-sand">
               {item.label}
             </button>
           ))}
