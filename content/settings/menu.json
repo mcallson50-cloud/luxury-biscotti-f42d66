@@ -6,9 +6,9 @@
       "note": "Single espresso shot"
     },
     {
-      "name": "Cortado",
-      "price": "€3.40",
-      "note": "The house default"
+      "name": "Macchiato",
+      "price": "20",
+      "note": "Espresso topped with a touch of steamed milk"
     },
     {
       "name": "Nass-Nass",
