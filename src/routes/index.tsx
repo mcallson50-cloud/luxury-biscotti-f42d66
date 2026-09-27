@@ -76,7 +76,7 @@ function Home() {
         <Container>
           <div className="grid items-center gap-8 md:grid-cols-2 md:gap-16">
             <Reveal>
-              <Frame photo="placeShopDog" ratio="portrait" width={1200} sizes="(min-width: 768px) 46vw, 100vw" />
+              <Frame photo="placeShopDog" ratio="tall" className="w-full [&>img]:absolute [&>img]:inset-0" width={1200} sizes="(min-width: 768px) 46vw, 100vw" />
             </Reveal>
             <Reveal>
               <p className="t-label text-ink-faint">{home.placeLabel}</p>
