@@ -1,8 +1,9 @@
+import visit from '../../content/settings/visit.json'
 import { Link, createFileRoute } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 
 import { ContactForm } from '@/components/contact-form'
-import { Frame, VideoPanel } from '@/components/media'
+import { Frame } from '@/components/media'
 import { Container, SectionHead } from '@/components/ui/primitives'
 import { site } from '@/data/site'
 
@@ -49,13 +50,13 @@ function Visit() {
             {site.locationLabel}
           </p>
           <h1 className="t-display mt-5 text-[clamp(44px,8vw,138px)]">
-            Come and sit
+            {visit.headingLineOne}
             <br />
-            for a while.
+            {visit.headingLineTwo}
           </h1>
           <div className="mt-10 grid gap-10 border-t border-ink/15 pt-8 lg:grid-cols-12 lg:gap-10">
             <div className="lg:col-span-4">
-              <h2 className="t-label text-ink-faint">The address</h2>
+              <h2 className="t-label text-ink-faint">{visit.addressHeading}</h2>
               <address className="t-lead mt-4 not-italic">
                 {site.locationLabel}
               </address>
@@ -66,19 +67,19 @@ function Visit() {
                   rel="noreferrer noopener"
                   className="btn btn-solid"
                 >
-                  Get directions
+                  {visit.directionsLabel}
                 </a>
               </div>
             </div>
 
             <div className="lg:col-span-4">
-              <h2 className="t-label text-ink-faint">Getting here</h2>
-              <p className="t-body mt-4">Find BLASSA STUDIO in Tamraght, Morocco. Open our Google Maps listing for the exact location and directions.</p>
+              <h2 className="t-label text-ink-faint">{visit.gettingHereHeading}</h2>
+              <p className="t-body mt-4">{visit.gettingHereText}</p>
               <p className="t-body mt-4">{site.tagline}</p>
             </div>
 
             <div className="lg:col-span-4">
-              <h2 className="t-label text-ink-faint">Get in touch</h2>
+              <h2 className="t-label text-ink-faint">{visit.contactHeading}</h2>
               <ul className="mt-4 grid gap-2.5 text-[15px]">
                 <li>
                   <a href={`mailto:${site.contact.email}`} className="link-rule">
@@ -114,9 +115,8 @@ function Visit() {
 
       {/* ── The room, on film ──────────────────────────────────── */}
       <section className="mt-16 md:mt-20">
-        <VideoPanel
-          video="/media/counter.mp4"
-          poster="spaceWindowTable"
+        <Frame
+          photo="visitHero"
           ratio="cinema"
           radius="flat"
           width={2400}
@@ -198,15 +198,14 @@ function Visit() {
       {/* ── Contact ────────────────────────────────────────────── */}
       <section className="mt-24 md:mt-32">
         <Container>
-          <SectionHead label="Write to us" aside="We reply in a day or two" />
+          <SectionHead label={visit.writeHeading} aside={visit.replyNote} />
           <div className="mt-10 grid gap-12 lg:grid-cols-12 lg:gap-10">
             <div className="lg:col-span-7">
               <h2 className="t-display max-w-[22ch] text-[clamp(30px,3.8vw,58px)]">
-                Questions about a size, a workshop, or bringing your own beans in.
+                {visit.writeTitle}
               </h2>
               <p className="t-body mt-5 max-w-md">
-                For a table of more than six, or the long table on a Sunday, ring
-                instead — it is faster than email and we will know straight away.
+                {visit.writeText}
               </p>
               <div className="mt-10">
                 <ContactForm />

@@ -26,20 +26,56 @@ export default defineConfig({
   schema: {
     collections: [
       {
-        name: 'shopImages', label: 'Shop photos', path: 'content/settings',
-        format: 'json', match: { include: 'shop-images' }, ui: singleton,
+        name: 'visitPage', label: 'Visit text', path: 'content/settings',
+        format: 'json', match: { include: 'visit' }, ui: singleton,
         fields: [
-          object('blassaTee', "Blassa Tee", [imageSlot('main', 'Main product photo'), imageSlot('gallery2', 'Gallery photo 2'), imageSlot('gallery3', 'Gallery photo 3')]),
-          object('soukOvershirt', "Souk Overshirt", [imageSlot('main', 'Main product photo'), imageSlot('gallery2', 'Gallery photo 2'), imageSlot('gallery3', 'Gallery photo 3')]),
-          object('nassNassCrewneck', "Nass-Nass Crewneck", [imageSlot('main', 'Main product photo'), imageSlot('gallery2', 'Gallery photo 2'), imageSlot('gallery3', 'Gallery photo 3')]),
-          object('zelligeBomber', "Zellige Bomber", [imageSlot('main', 'Main product photo'), imageSlot('gallery2', 'Gallery photo 2'), imageSlot('gallery3', 'Gallery photo 3')]),
-          object('regularsJacket', "Regular's Jacket", [imageSlot('main', 'Main product photo'), imageSlot('gallery2', 'Gallery photo 2'), imageSlot('gallery3', 'Gallery photo 3')]),
+          text('headingLineOne', 'First heading: line 1'), text('headingLineTwo', 'First heading: line 2'),
+          text('addressHeading', 'Address heading'), text('directionsLabel', 'Directions button'),
+          text('gettingHereHeading', 'Getting here heading'), text('gettingHereText', 'Getting here paragraph'),
+          text('contactHeading', 'Contact heading'), text('writeHeading', 'Write to us label'),
+          text('replyNote', 'Reply-time note'), text('writeTitle', 'Write to us heading'),
+          { ...text('writeText', 'Write to us paragraph'), ui: { component: 'textarea' } },
         ],
       },
       {
+        name: 'products', label: 'Shop products', path: 'content/settings',
+        format: 'json', match: { include: 'products' }, ui: singleton,
+        fields: [{
+          type: 'object', name: 'products', label: 'Products', list: true,
+          ui: {
+            itemProps: (item) => ({ label: item.name || 'New product' }),
+            defaultItem: { name: 'New product', slug: 'new-product', colour: '', price: '', status: 'available',
+              summary: '', story: '', storyHeading: 'Why it exists', salesNote: '', placeholderText: 'Not yet photographed',
+              badge: '', photo: { id: '', alt: '' }, gallery: [], sizes: [], spec: [] },
+          },
+          fields: [
+            text('name', 'Product name'),
+            { ...text('slug', 'URL slug'), description: 'Unique lowercase words separated by hyphens. Changing it changes the product URL.',
+              ui: { validate: (value: string | undefined) => !value || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value) ? 'Use lowercase words separated by hyphens.' : undefined } },
+            text('colour', 'Colour', false), text('price', 'Price (include currency)'),
+            { ...text('status', 'Availability'), options: ['available', 'low-stock', 'coming-soon'] },
+            text('badge', 'Badge text', false),
+            { ...text('summary', 'Short description'), ui: { component: 'textarea' } },
+            text('storyHeading', 'Description heading'),
+            { ...text('story', 'Full description'), ui: { component: 'textarea' } },
+            text('salesNote', 'Availability / reservation note', false), text('placeholderText', 'Text when no photo is provided'),
+            { type: 'object', name: 'photo', label: 'Main product photo', fields: [
+              { type: 'image', name: 'id', label: 'Photo' }, text('alt', 'Photo description', false),
+            ] },
+            { type: 'object', name: 'gallery', label: 'Additional gallery photos', list: true,
+              fields: [{ type: 'image', name: 'id', label: 'Photo', required: true }, text('alt', 'Photo description')] },
+            { type: 'string', name: 'sizes', label: 'Sizes', list: true },
+            { type: 'object', name: 'spec', label: 'Specifications', list: true,
+              ui: { itemProps: (item) => ({ label: item.label }) },
+              fields: [text('label', 'Label'), text('value', 'Value')] },
+          ],
+        }],
+      },
+
+      {
         name: 'visitImages', label: 'Visit photos', path: 'content/settings',
         format: 'json', match: { include: 'visit-images' }, ui: singleton,
-        fields: [imageSlot('main', 'Main Visit photo')],
+        fields: [imageSlot('hero', 'First Visit photo'), imageSlot('main', 'Write to us photo')],
       },
 
       {
@@ -71,7 +107,7 @@ export default defineConfig({
         name: 'studio', label: 'Studio details', path: 'content/settings',
         format: 'json', match: { include: 'site' }, ui: singleton,
         fields: [
-          text('name', 'Studio name'), text('tagline', 'Tagline'),
+          text('copyrightYear', 'Copyright year'), text('name', 'Studio name'), text('tagline', 'Tagline'),
           { ...text('description', 'Site description'), ui: { component: 'textarea' } },
           text('url', 'Website URL'), text('locationLabel', 'Location label'),
           text('hoursSummary', 'Short opening-hours text'), text('hoursNote', 'Opening-hours note'),
@@ -96,13 +132,13 @@ export default defineConfig({
       {
         name: 'cafeMenu', label: 'Café menu', path: 'content/settings',
         format: 'json', match: { include: 'menu' }, ui: singleton,
-        fields: [menuItems('coffee', 'Drinks'), menuItems('beans', 'Beans to take away')],
+        fields: [menuItems('coffee', 'COFFEE'), menuItems('beans', 'EXTRAS'), menuItems('nonCoffee', 'NON COFFEE'), menuItems('specials', 'BLASSA SPECIALS')],
       },
       {
         name: 'homeImages', label: 'Homepage photos', path: 'content/settings',
         format: 'json', match: { include: 'images' }, ui: singleton,
         fields: [
-          ['heroPicnic', 'Main hero photo'], ['placeShopDog', 'The place photo'],
+          ['heroPicnic', 'Main hero photo'], ['placeShopDog', 'The Place / Vertical'],
           ['menuIcedPour', 'Menu photo'], ['clothingCrew', 'Clothing photo'],
         ].map(([name, label]) => object(name, label, [
           { type: 'image', name: 'id', label: 'Photo', required: true },

@@ -55,7 +55,7 @@ export function SiteFooter() {
 
         <div className="mt-8 flex flex-col-reverse gap-4 border-t border-ink/12 pt-6 md:flex-row md:items-center md:justify-between">
           <p className="t-label text-ink-faint">
-            © {new Date().getFullYear()} {site.name}
+            © {site.copyrightYear} {site.name}
           </p>
           <p className="t-label text-ink-faint">
             {site.address.city} — {site.address.country}

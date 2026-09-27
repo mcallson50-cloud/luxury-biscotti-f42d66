@@ -66,7 +66,7 @@ function PieceDetail() {
             ) : (
               <div className="frame flex aspect-[4/5] items-center justify-center">
                 <p className="t-label max-w-[22ch] text-center text-clay">
-                  Photographed in October
+                  {piece.placeholderText}
                 </p>
               </div>
             )}
@@ -140,16 +140,12 @@ function PieceDetail() {
               </div>
 
               <p className="t-body mt-4 text-[13px]">
-                {piece.status === 'low-stock'
-                  ? 'Last sizes of this run — once it is gone we are not re-cutting it.'
-                  : 'Sold across the counter in ' +
-                    site.address.city +
-                    '. Email holds a size for three days.'}
+                {piece.salesNote}
               </p>
 
               {/* Story + spec */}
               <div className="mt-10 border-t border-ink/15 pt-6">
-                <h2 className="t-label">Why it exists</h2>
+                <h2 className="t-label">{piece.storyHeading}</h2>
                 <p className="t-body mt-3.5">{piece.story}</p>
               </div>
 

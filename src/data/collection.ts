@@ -1,3 +1,4 @@
+import productContent from '../../content/settings/products.json'
 import shopContent from '../../content/settings/shop.json'
 import menuContent from '../../content/settings/menu.json'
 import type { PhotoKey } from './photos'
@@ -9,6 +10,10 @@ import type { PhotoKey } from './photos'
  */
 
 export type Piece = {
+  badge?: string
+  storyHeading: string
+  salesNote: string
+  placeholderText: string
   slug: string
   name: string
   colour: string
@@ -23,127 +28,29 @@ export type Piece = {
   sizes: string[]
 }
 
-export const pieces: Piece[] = [
-  {
-    slug: 'blassa-tee',
-    name: 'Blassa Tee',
-    colour: 'Bone',
-    price: '€48',
-    status: 'available',
-    photo: 'blassaTeeMain',
-    gallery: ['blassaTeeMain', 'blassaTeeGallery2', 'blassaTeeGallery3'],
-    summary:
-      'The heavyweight tee the counter staff wear. 240gsm, boxy, holds its shape through a hundred washes.',
-    story:
-      'We went through four samples before we stopped fiddling with it. The first three were too soft — they looked worn out by the second shift. This one is a 240gsm loopback cotton with a taped neck and a slightly dropped shoulder, so it sits square rather than clinging. The wordmark is printed small on the left hem in a matte clay ink; you have to be close to read it.',
-    spec: [
-      { label: 'Fabric', value: '240gsm organic loopback cotton, undyed' },
-      { label: 'Fit', value: 'Boxy, true to size — size down for a slim fit' },
-      { label: 'Made in', value: 'Porto, Portugal' },
-      { label: 'Care', value: 'Cold wash, dry flat. It will soften, not shrink.' },
+type ProductContent = Omit<Piece, 'photo' | 'gallery'> & {
+  photo?: { id: string; alt: string }
+  gallery?: { id: string; alt: string }[]
+}
+const productRows = (productContent.products ?? []) as ProductContent[]
+const productSlugs = new Set<string>()
+export const pieces: Piece[] = productRows.map((p) => {
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(p.slug) || productSlugs.has(p.slug)) {
+    throw new Error(`Product URL must be unique and use lowercase words separated by hyphens: ${p.slug}`)
+  }
+  productSlugs.add(p.slug)
+  const main = p.photo?.id ? `product:${p.slug}:main` : undefined
+  return {
+    ...p,
+    photo: main,
+    gallery: [
+      ...(main ? [main] : []),
+      ...(p.gallery ?? []).flatMap((image, i) => image.id ? [`product:${p.slug}:gallery:${i}`] : []),
     ],
-    sizes: ['XS', 'S', 'M', 'L', 'XL'],
-  },
-  {
-    slug: 'souk-overshirt',
-    name: 'Souk Overshirt',
-    colour: 'Sage',
-    price: '€135',
-    status: 'available',
-    photo: 'soukOvershirtMain',
-    gallery: ['soukOvershirtMain', 'soukOvershirtGallery2', 'soukOvershirtGallery3'],
-    summary:
-      'A linen-cotton overshirt you can wear as a jacket in September and a shirt in November.',
-    story:
-      'Cut long enough to cover the hem of a tee, with two patch pockets deep enough for a phone and a set of keys — which is the whole brief, really. The cloth is a 55/45 linen-cotton woven in Portugal that starts slightly crisp and collapses into something much softer after a month. The sage is pigment-dyed, so it will fade unevenly at the elbows and cuffs. That is the point.',
-    spec: [
-      { label: 'Fabric', value: '55% linen, 45% cotton, pigment-dyed' },
-      { label: 'Fit', value: 'Relaxed, straight through the body' },
-      { label: 'Made in', value: 'Porto, Portugal' },
-      { label: 'Care', value: 'Cold wash with like colours. Expect honest fading.' },
-    ],
-    sizes: ['S', 'M', 'L', 'XL'],
-  },
-  {
-    slug: 'nass-nass-crewneck',
-    name: 'Nass-Nass Crewneck',
-    colour: 'Terracotta',
-    price: '€98',
-    status: 'low-stock',
-    photo: 'nassNassCrewneckMain',
-    gallery: ['nassNassCrewneckMain', 'nassNassCrewneckGallery2', 'nassNassCrewneckGallery3'],
-    summary:
-      'Ribbed cotton knit named after the half-espresso, half-milk order half our regulars make.',
-    story:
-      'Nass-nass means half-half — it is how you ask for a coffee that is neither one thing nor the other. The knit is the same: too fine to be a sweatshirt, too heavy to be a long-sleeve. A 12-gauge ribbed cotton with a flat-knit collar that does not stretch out. It is the piece we have re-ordered yarn for twice, because the terracotta is difficult to hit twice in a row.',
-    spec: [
-      { label: 'Fabric', value: '12-gauge ribbed cotton, garment-dyed' },
-      { label: 'Fit', value: 'Regular with a short body — sits at the waistband' },
-      { label: 'Made in', value: 'Bologna, Italy' },
-      { label: 'Care', value: 'Hand wash cold, reshape damp, dry flat.' },
-    ],
-    sizes: ['S', 'M', 'L'],
-  },
-  {
-    slug: 'zellige-bomber',
-    name: 'Zellige Bomber',
-    colour: 'Clay',
-    price: '€245',
-    status: 'available',
-    photo: 'zelligeBomberMain',
-    gallery: ['zelligeBomberMain', 'zelligeBomberGallery2', 'zelligeBomberGallery3'],
-    summary:
-      'The one properly considered piece in the capsule. Cotton-nylon shell, cupro lining, no logo anywhere.',
-    story:
-      'Named after the cut tilework behind the counter, which is where the colour came from — that particular clay you only get from unglazed terracotta in low light. The shell is a tightly woven cotton-nylon that shrugs off drizzle; the lining is cupro, so it slides over a knit instead of dragging. Ribbed collar, two-way zip, one internal pocket sized for a passport. We made forty.',
-    spec: [
-      { label: 'Shell', value: '66% cotton, 34% nylon, water-repellent finish' },
-      { label: 'Lining', value: 'Bemberg cupro' },
-      { label: 'Made in', value: 'Kraków, Poland' },
-      { label: 'Care', value: 'Spot clean. Dry clean once a season, not more.' },
-    ],
-    sizes: ['S', 'M', 'L', 'XL'],
-  },
-  {
-    slug: 'regulars-jacket',
-    name: "Regular's Jacket",
-    colour: 'Tobacco',
-    price: '€180',
-    status: 'available',
-    photo: 'regularsJacketMain',
-    gallery: ['regularsJacketMain', 'regularsJacketGallery2', 'regularsJacketGallery3'],
-    summary:
-      'An unlined chore jacket in brushed cotton twill. Three pockets, no lining, wears in fast.',
-    story:
-      'Built off a French workwear pattern from the fifties, with the armholes opened up so you can actually reach across a table. Brushed 10oz cotton twill in a tobacco brown that goes lighter at the seams within a season. Corozo buttons, felled seams, and no lining at all — it is meant to be a layer, not a coat.',
-    spec: [
-      { label: 'Fabric', value: '10oz brushed cotton twill' },
-      { label: 'Fit', value: 'Roomy — wears well over the crewneck' },
-      { label: 'Made in', value: 'Porto, Portugal' },
-      { label: 'Care', value: 'Machine wash cold. Iron the collar, ignore the rest.' },
-    ],
-    sizes: ['XS', 'S', 'M', 'L', 'XL'],
-  },
-  {
-    slug: 'service-apron',
-    name: 'Service Apron',
-    colour: 'Olive',
-    price: '€62',
-    status: 'coming-soon',
-    gallery: [],
-    summary:
-      'The cross-back apron the team wears. Being re-cut in waxed canvas — photographed and listed in October.',
-    story:
-      'The current version is a prototype held together with the wrong hardware, which is why it is not for sale yet. The next run is waxed 12oz canvas with a cross-back strap that does not slide off a shoulder, a towel loop, and a pocket that fits a tamper. Ask at the counter if you want one held back for you.',
-    spec: [
-      { label: 'Fabric', value: '12oz waxed canvas (in development)' },
-      { label: 'Fit', value: 'One size, cross-back, adjustable' },
-      { label: 'Made in', value: 'Berlin, Germany' },
-      { label: 'Status', value: 'Sampling — listed in October 2026' },
-    ],
-    sizes: ['One size'],
-  },
-]
+    sizes: p.sizes ?? [],
+    spec: p.spec ?? [],
+  }
+})
 
 export const collection = {
   ...shopContent,

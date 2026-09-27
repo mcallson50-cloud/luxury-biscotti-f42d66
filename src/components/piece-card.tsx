@@ -4,11 +4,6 @@ import { Frame } from '@/components/media'
 import type { Piece } from '@/data/collection'
 import { cn } from '@/lib/utils'
 
-const statusLabel: Record<Piece['status'], string | null> = {
-  available: null,
-  'low-stock': 'Last sizes',
-  'coming-soon': 'October',
-}
 
 export function PieceCard({
   piece,
@@ -22,7 +17,7 @@ export function PieceCard({
   className?: string
   sizes?: string
 }) {
-  const badge = statusLabel[piece.status]
+  const badge = piece.badge
 
   return (
     <Link
@@ -40,7 +35,7 @@ export function PieceCard({
           altText={
             piece.photo
               ? undefined
-              : `${piece.name} — photography coming in October`
+              : `${piece.name} — not yet photographed`
           }
         />
         {badge ? (
@@ -50,7 +45,7 @@ export function PieceCard({
         ) : null}
         {!piece.photo ? (
           <span className="absolute inset-0 flex items-center justify-center p-6 text-center">
-            <span className="t-label text-clay">Not yet photographed</span>
+            <span className="t-label text-clay">{piece.placeholderText}</span>
           </span>
         ) : null}
       </div>

@@ -1,4 +1,4 @@
-import shopImages from '../../content/settings/shop-images.json'
+import productContent from '../../content/settings/products.json'
 import visitImages from '../../content/settings/visit-images.json'
 import images from '../../content/settings/images.json'
 
@@ -19,22 +19,16 @@ type Photo = {
 
 const photo = (id: string, alt: string): Photo => ({ id, alt })
 
-export const photos = {
-  blassaTeeMain: shopImages.blassaTee.main,
-  blassaTeeGallery2: shopImages.blassaTee.gallery2,
-  blassaTeeGallery3: shopImages.blassaTee.gallery3,
-  soukOvershirtMain: shopImages.soukOvershirt.main,
-  soukOvershirtGallery2: shopImages.soukOvershirt.gallery2,
-  soukOvershirtGallery3: shopImages.soukOvershirt.gallery3,
-  nassNassCrewneckMain: shopImages.nassNassCrewneck.main,
-  nassNassCrewneckGallery2: shopImages.nassNassCrewneck.gallery2,
-  nassNassCrewneckGallery3: shopImages.nassNassCrewneck.gallery3,
-  zelligeBomberMain: shopImages.zelligeBomber.main,
-  zelligeBomberGallery2: shopImages.zelligeBomber.gallery2,
-  zelligeBomberGallery3: shopImages.zelligeBomber.gallery3,
-  regularsJacketMain: shopImages.regularsJacket.main,
-  regularsJacketGallery2: shopImages.regularsJacket.gallery2,
-  regularsJacketGallery3: shopImages.regularsJacket.gallery3,
+const productPhotos: Record<string, Photo> = Object.fromEntries(
+  (productContent.products ?? []).flatMap((p) => [
+    [`product:${p.slug}:main`, { id: p.photo?.id ?? "", alt: p.photo?.alt ?? p.name }],
+    ...(p.gallery ?? []).map((photo, i) => [`product:${p.slug}:gallery:${i}`, photo]),
+  ]),
+)
+
+export const photos: Record<string, Photo> = {
+  ...productPhotos,
+  visitHero: visitImages.hero,
   visitMain: visitImages.main,
   // Home hero
   heroPicnic: images.heroPicnic,

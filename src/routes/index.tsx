@@ -5,7 +5,7 @@ import { InstagramFeed } from '@/components/instagram-feed'
 import { Frame } from '@/components/media'
 import { Reveal } from '@/components/reveal'
 import { Container, SectionHead } from '@/components/ui/primitives'
-import { menu } from '@/data/collection'
+import { CafeMenu } from '@/components/cafe-menu'
 import { site } from '@/data/site'
 
 export const Route = createFileRoute('/')({ component: Home })
@@ -76,7 +76,7 @@ function Home() {
         <Container>
           <div className="grid items-center gap-8 md:grid-cols-2 md:gap-16">
             <Reveal>
-              <Frame photo="placeShopDog" ratio="tall" width={1200} sizes="(min-width: 768px) 46vw, 100vw" />
+              <Frame photo="placeShopDog" ratio="portrait" width={1200} sizes="(min-width: 768px) 46vw, 100vw" />
             </Reveal>
             <Reveal>
               <p className="t-label text-ink-faint">{home.placeLabel}</p>
@@ -91,59 +91,7 @@ function Home() {
       <section id="menu" className="mt-16 scroll-mt-28 md:mt-24">
         <Container>
           <SectionHead label="The menu" aside={home.menuCurrencyNote} />
-          <div className="mt-10 grid gap-12 lg:grid-cols-12 lg:gap-10">
-            <Reveal className="lg:col-span-4">
-              <h3 className="t-heading text-[26px]">On the bar</h3>
-              <ul className="mt-5">
-                {menu.coffee.map((item) => (
-                  <li
-                    key={item.name}
-                    className="flex items-baseline justify-between gap-4 border-b border-ink/10 py-3.5"
-                  >
-                    <span className="text-[15px]">
-                      {item.name}
-                      <span className="mt-1 block text-[12px] text-ink-faint">
-                        {item.note}
-                      </span>
-                    </span>
-                    <span className="text-[14px] text-ink-soft">{item.price}</span>
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-
-            <Reveal delay={90} className="lg:col-span-4">
-              <h3 className="t-heading text-[26px]">Beans to take away</h3>
-              <ul className="mt-5">
-                {menu.beans.map((item) => (
-                  <li
-                    key={item.name}
-                    className="flex items-baseline justify-between gap-4 border-b border-ink/10 py-3.5"
-                  >
-                    <span className="text-[15px]">
-                      {item.name}
-                      <span className="mt-1 block text-[12px] text-ink-faint">
-                        {item.note}
-                      </span>
-                    </span>
-                    <span className="text-[14px] text-ink-soft">{item.price}</span>
-                  </li>
-                ))}
-              </ul>
-              <Link to="/visit" className="btn btn-ghost mt-6">
-                Hours + map
-              </Link>
-            </Reveal>
-
-            <Reveal delay={170} className="lg:col-span-4">
-              <Frame
-                photo="menuIcedPour"
-                ratio="tall"
-                width={900}
-                sizes="(min-width: 1024px) 30vw, 100vw"
-              />
-            </Reveal>
-          </div>
+          <CafeMenu />
         </Container>
       </section>
 
