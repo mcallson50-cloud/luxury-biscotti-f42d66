@@ -29,6 +29,11 @@
       "name": "Flat White  ",
       "price": "30",
       "note": "Espresso with velvety steamed milk"
+    },
+    {
+      "name": "Latte    ",
+      "price": "30",
+      "note": "Espresso with steamed milk"
     }
   ],
   "beans": [
