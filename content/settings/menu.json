@@ -71,6 +71,14 @@
       "price": "25"
     },
     {
+      "name": "Beetroot Latte",
+      "price": "35"
+    },
+    {
+      "name": "Turmeric Latte",
+      "price": "35"
+    },
+    {
       "name": "Fresh Hot Ginger Tea",
       "price": "20"
     },
@@ -81,14 +89,6 @@
     {
       "name": "Peach Iced Tea",
       "price": "25"
-    },
-    {
-      "name": "Beetroot Latte",
-      "price": "35"
-    },
-    {
-      "name": "Turmeric Latte",
-      "price": "35"
     }
   ],
   "specials": [
