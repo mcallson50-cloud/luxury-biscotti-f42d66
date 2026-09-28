@@ -65,6 +65,10 @@
     {
       "name": "Chai",
       "price": "35"
+    },
+    {
+      "name": "Hot Chocolate",
+      "price": "25"
     }
   ],
   "specials": []
