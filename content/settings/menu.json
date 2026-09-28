@@ -88,6 +88,11 @@
       "name": "Coco Loco",
       "price": "45",
       "note": "Iced Matcha · coconut milk · coconut cold foam"
+    },
+    {
+      "name": "Vanilla Ice",
+      "price": "45",
+      "note": "Iced Coffee · caramel milk · vanilla cold foam"
     }
   ]
 }
