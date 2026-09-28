@@ -6,14 +6,14 @@
       "note": "Single espresso shot"
     },
     {
-      "name": "Macchiato",
-      "price": "20",
-      "note": "Espresso topped with a touch of steamed milk"
-    },
-    {
       "name": "Americano",
       "price": "20",
       "note": "Espresso topped with hot water"
+    },
+    {
+      "name": "Macchiato",
+      "price": "20",
+      "note": "Espresso topped with a touch of steamed milk"
     },
     {
       "name": "Noss Noss",
