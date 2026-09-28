@@ -69,6 +69,10 @@
     {
       "name": "Hot Chocolate",
       "price": "25"
+    },
+    {
+      "name": "Fresh Hot Ginger Tea",
+      "price": "20"
     }
   ],
   "specials": []
