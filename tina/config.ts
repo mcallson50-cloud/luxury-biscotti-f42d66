@@ -35,6 +35,7 @@ export default defineConfig({
             { type: 'image', name: 'id', label: 'Photo', required: true },
             text('alt', 'Photo description for accessibility'),
             text('caption', 'Hover caption', false),
+            { ...text('instagramUrl', 'Instagram link', false), description: 'Paste the full Instagram post or reel URL. Leave blank to link to the studio profile.' },
           ],
         }],
       },

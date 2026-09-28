@@ -3,8 +3,18 @@ import { Container, SectionHead } from '@/components/ui/primitives'
 import aroundBlassa from '../../content/settings/around-blassa.json'
 import { site } from '@/data/site'
 
-const tiles = aroundBlassa.photos
-  .map((photo, index) => ({ photo: `aroundBlassa:${index}`, caption: photo.caption, id: photo.id }))
+type AroundPhoto = { id: string; alt: string; caption?: string; instagramUrl?: string }
+
+function instagramLink(value?: string) {
+  try {
+    const url = new URL(value?.trim() || site.social.instagram)
+    if (url.protocol === 'https:' && (url.hostname === 'instagram.com' || url.hostname.endsWith('.instagram.com'))) return url.href
+  } catch { /* Use the studio profile when the link is missing or invalid. */ }
+  return site.social.instagram
+}
+
+const tiles = (aroundBlassa.photos as AroundPhoto[])
+  .map((photo, index) => ({ photo: `aroundBlassa:${index}`, caption: photo.caption, id: photo.id, href: instagramLink(photo.instagramUrl) }))
   .filter((photo) => photo.id)
 
 export function InstagramFeed({ index }: { index?: string } = {}) {
@@ -34,7 +44,7 @@ export function InstagramFeed({ index }: { index?: string } = {}) {
         {tiles.map((tile) => (
           <a
             key={tile.photo}
-            href={site.social.instagram}
+            href={tile.href}
             target="_blank"
             rel="noreferrer noopener"
             className="group relative w-[68vw] shrink-0 snap-start sm:w-[42vw] md:w-auto"
