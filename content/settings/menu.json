@@ -83,5 +83,11 @@
       "price": "25"
     }
   ],
-  "specials": []
+  "specials": [
+    {
+      "name": "Coco Loco",
+      "price": "45",
+      "note": "Iced Matcha · coconut milk · coconut cold foam"
+    }
+  ]
 }
