@@ -72,7 +72,7 @@ function Journal() {
                 'rounded-full border px-4 py-2 text-[11px] tracking-[0.18em] uppercase transition-colors duration-300',
                 !category
                   ? 'border-sand bg-sand text-ink'
-                  : 'border-ink/20 bg-transparent text-ink-soft hover:border-ink hover:text-ink active:bg-sand',
+                  : 'border-ink/20 bg-transparent text-ink-soft hover:border-sand hover:bg-sand hover:text-ink active:bg-sand',
               )}
             >
               Everything
@@ -86,7 +86,7 @@ function Journal() {
                   'rounded-full border px-4 py-2 text-[11px] tracking-[0.18em] uppercase transition-colors duration-300',
                   category === name
                     ? 'border-sand bg-sand text-ink'
-                    : 'border-ink/20 bg-transparent text-ink-soft hover:border-ink hover:text-ink active:bg-sand',
+                    : 'border-ink/20 bg-transparent text-ink-soft hover:border-sand hover:bg-sand hover:text-ink active:bg-sand',
                 )}
               >
                 {name}

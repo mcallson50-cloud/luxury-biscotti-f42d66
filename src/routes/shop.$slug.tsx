@@ -101,7 +101,7 @@ function PieceDetail() {
                         'min-w-[3.25rem] rounded-full border px-4 py-2.5 text-[12px] tracking-[0.14em] uppercase transition-colors duration-300',
                         size === option
                           ? 'border-sand bg-sand text-ink'
-                          : 'border-ink/20 bg-transparent text-ink-soft hover:border-ink hover:text-ink active:bg-sand',
+                          : 'border-ink/20 bg-transparent text-ink-soft enabled:hover:border-sand enabled:hover:bg-sand enabled:hover:text-ink enabled:active:bg-sand',
                         unavailable && 'cursor-not-allowed opacity-45',
                       )}
                     >
