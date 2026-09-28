@@ -93,6 +93,11 @@
       "name": "Vanilla Ice",
       "price": "45",
       "note": "Iced Coffee · caramel milk · vanilla cold foam"
+    },
+    {
+      "name": "Pink Cloud",
+      "price": "45",
+      "note": "Iced Chai · oat milk · beetroot cold foam"
     }
   ]
 }
