@@ -98,6 +98,11 @@
       "name": "Pink Cloud",
       "price": "45",
       "note": "Iced Chai · oat milk · beetroot cold foam"
+    },
+    {
+      "name": "Strawberry Matcha",
+      "price": "50",
+      "note": "Iced Matcha · oat milk · strawberry syrup · cold foam"
     }
   ]
 }
