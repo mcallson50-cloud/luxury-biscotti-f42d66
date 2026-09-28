@@ -1,3 +1,4 @@
+import aroundBlassa from '../../content/settings/around-blassa.json'
 import productContent from '../../content/settings/products.json'
 import visitImages from '../../content/settings/visit-images.json'
 import images from '../../content/settings/images.json'
@@ -28,6 +29,7 @@ const productPhotos: Record<string, Photo> = Object.fromEntries(
 
 export const photos: Record<string, Photo> = {
   ...productPhotos,
+  ...Object.fromEntries(aroundBlassa.photos.map((photo, index) => [`aroundBlassa:${index}`, photo])),
   visitHero: visitImages.hero,
   visitMain: visitImages.main,
   // Home hero

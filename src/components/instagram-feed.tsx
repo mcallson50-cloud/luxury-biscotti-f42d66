@@ -1,31 +1,15 @@
 import { Frame } from '@/components/media'
 import { Container, SectionHead } from '@/components/ui/primitives'
-import type { PhotoKey } from '@/data/photos'
+import aroundBlassa from '../../content/settings/around-blassa.json'
 import { site } from '@/data/site'
 
-/**
- * Instagram strip.
- *
- * A curated static grid rather than a live feed: pulling real posts needs a
- * long-lived Instagram Graph API token, which is a deploy-time decision the
- * studio has to make. Swap `tiles` for fetched posts and everything below
- * keeps working — see AGENTS.md.
- */
-
-type Tile = { photo: PhotoKey; caption: string }
-
-const tiles: Tile[] = [
-  { photo: 'coffeeShadow', caption: 'Four o’clock light, every day this week' },
-  { photo: 'clothingSage', caption: 'Souk Overshirt — sage, back in all sizes' },
-  { photo: 'spaceCounter', caption: 'New shelf, same mess' },
-  { photo: 'coffeePourOver', caption: 'Guji on filter from Thursday' },
-  { photo: 'clothingKnitFlatlay', caption: 'Nass-Nass crewneck, third yarn lot' },
-  { photo: 'spaceTable', caption: 'Sunday long table — 14 people, one pot' },
-  { photo: 'coffeeIced', caption: 'Orange blossom cold brew, last of the season' },
-  { photo: 'spacePlants', caption: 'The monstera has taken the corner' },
-]
+const tiles = aroundBlassa.photos
+  .map((photo, index) => ({ photo: `aroundBlassa:${index}`, caption: photo.caption, id: photo.id }))
+  .filter((photo) => photo.id)
 
 export function InstagramFeed({ index }: { index?: string } = {}) {
+  if (!tiles.length) return null
+
   return (
     <section className="mt-16 md:mt-24">
       <Container>
@@ -45,9 +29,9 @@ export function InstagramFeed({ index }: { index?: string } = {}) {
         />
       </Container>
 
-      {/* Four curated images, with horizontal scrolling on small screens. */}
+      {/* Curated images, with horizontal scrolling on small screens. */}
       <div className="mt-6 flex snap-x snap-mandatory gap-2.5 overflow-x-auto px-5 pb-2 md:grid md:grid-cols-4 md:overflow-visible md:px-10 ">
-        {tiles.slice(0, 4).map((tile) => (
+        {tiles.map((tile) => (
           <a
             key={tile.photo}
             href={site.social.instagram}

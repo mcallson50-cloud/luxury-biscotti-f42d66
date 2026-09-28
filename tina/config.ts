@@ -26,6 +26,19 @@ export default defineConfig({
   schema: {
     collections: [
       {
+        name: 'aroundBlassa', label: 'Around Blassa photos', path: 'content/settings',
+        format: 'json', match: { include: 'around-blassa' }, ui: singleton,
+        fields: [{
+          type: 'object', name: 'photos', label: 'Photos', list: true,
+          ui: { itemProps: (item) => ({ label: item.caption || item.alt || 'New photo' }) },
+          fields: [
+            { type: 'image', name: 'id', label: 'Photo', required: true },
+            text('alt', 'Photo description for accessibility'),
+            text('caption', 'Hover caption', false),
+          ],
+        }],
+      },
+      {
         name: 'visitPage', label: 'Visit text', path: 'content/settings',
         format: 'json', match: { include: 'visit' }, ui: singleton,
         fields: [

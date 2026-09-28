@@ -87,12 +87,6 @@ function Visit() {
                   </a>
                 </li>
                 <li>
-                  <a href={`mailto:${site.contact.press}`} className="link-rule">
-                    {site.contact.press}
-                  </a>
-                  <span className="text-ink-faint"> — press + stockists</span>
-                </li>
-                <li>
                   <a href={`tel:${site.contact.phoneHref}`} className="link-rule">
                     {site.contact.phone}
                   </a>

@@ -1,0 +1,24 @@
+{
+  "photos": [
+    {
+      "id": "https://images.unsplash.com/photo-1519455953755-af066f52f1a6?auto=format&fit=crop&q=72&w=560",
+      "alt": "A glass of coffee on a cream surface, leaf shadows falling across it",
+      "caption": "Four o’clock light, every day this week"
+    },
+    {
+      "id": "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&q=72&w=560",
+      "alt": "Sage green shirts hung close together on wooden hangers",
+      "caption": "Souk Overshirt — sage, back in all sizes"
+    },
+    {
+      "id": "https://images.unsplash.com/photo-1559496417-e7f25cb247f3?auto=format&fit=crop&q=72&w=560",
+      "alt": "The espresso counter, timber shelving stacked with cups and bags of beans",
+      "caption": "New shelf, same mess"
+    },
+    {
+      "id": "https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&q=72&w=560",
+      "alt": "Filter coffee being brewed by hand into glass carafes",
+      "caption": "Guji on filter from Thursday"
+    }
+  ]
+}
