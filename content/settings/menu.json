@@ -73,6 +73,10 @@
     {
       "name": "Fresh Hot Ginger Tea",
       "price": "20"
+    },
+    {
+      "name": "Lemon Iced Tea",
+      "price": "25"
     }
   ],
   "specials": []
