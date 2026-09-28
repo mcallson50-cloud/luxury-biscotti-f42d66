@@ -81,7 +81,12 @@
     {
       "name": "Peach Iced Tea",
       "price": "25"
-    }
+    },
+    {
+      "name": "Beetroot Latte",
+      "price": "35"
+    },
+    {}
   ],
   "specials": [
     {
