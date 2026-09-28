@@ -86,7 +86,10 @@
       "name": "Beetroot Latte",
       "price": "35"
     },
-    {}
+    {
+      "name": "Turmeric Latte",
+      "price": "35"
+    }
   ],
   "specials": [
     {
