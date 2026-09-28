@@ -77,6 +77,10 @@
     {
       "name": "Lemon Iced Tea",
       "price": "25"
+    },
+    {
+      "name": "Peach Iced Tea",
+      "price": "25"
     }
   ],
   "specials": []
