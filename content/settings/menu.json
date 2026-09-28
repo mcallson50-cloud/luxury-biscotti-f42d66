@@ -57,6 +57,11 @@
       "price": "no extra charge"
     }
   ],
-  "nonCoffee": [],
+  "nonCoffee": [
+    {
+      "name": "Matcha",
+      "price": "40"
+    }
+  ],
   "specials": []
 }
