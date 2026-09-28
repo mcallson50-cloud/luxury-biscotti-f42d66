@@ -71,8 +71,8 @@ function Journal() {
               className={cn(
                 'rounded-full border px-4 py-2 text-[11px] tracking-[0.18em] uppercase transition-colors duration-300',
                 !category
-                  ? 'border-espresso bg-espresso text-linen'
-                  : 'border-ink/20 text-ink-soft hover:border-ink hover:text-ink',
+                  ? 'border-sand bg-sand text-ink'
+                  : 'border-ink/20 bg-transparent text-ink-soft hover:border-ink hover:text-ink active:bg-sand',
               )}
             >
               Everything
@@ -85,8 +85,8 @@ function Journal() {
                 className={cn(
                   'rounded-full border px-4 py-2 text-[11px] tracking-[0.18em] uppercase transition-colors duration-300',
                   category === name
-                    ? 'border-espresso bg-espresso text-linen'
-                    : 'border-ink/20 text-ink-soft hover:border-ink hover:text-ink',
+                    ? 'border-sand bg-sand text-ink'
+                    : 'border-ink/20 bg-transparent text-ink-soft hover:border-ink hover:text-ink active:bg-sand',
                 )}
               >
                 {name}

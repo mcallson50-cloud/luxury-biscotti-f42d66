@@ -105,7 +105,7 @@ function Article() {
               key={category}
               to="/journal"
               search={{ category }}
-              className="rounded-full border border-ink/20 px-4 py-2 text-[11px] tracking-[0.18em] uppercase transition-colors duration-300 hover:border-ink hover:bg-ink hover:text-linen"
+              className="rounded-full border border-ink/20 px-4 py-2 text-[11px] tracking-[0.18em] uppercase transition-colors duration-300 bg-transparent hover:border-ink active:bg-sand active:text-ink"
             >
               {category}
             </Link>

@@ -100,8 +100,8 @@ function PieceDetail() {
                       className={cn(
                         'min-w-[3.25rem] rounded-full border px-4 py-2.5 text-[12px] tracking-[0.14em] uppercase transition-colors duration-300',
                         size === option
-                          ? 'border-espresso bg-espresso text-linen'
-                          : 'border-ink/20 text-ink-soft hover:border-ink hover:text-ink',
+                          ? 'border-sand bg-sand text-ink'
+                          : 'border-ink/20 bg-transparent text-ink-soft hover:border-ink hover:text-ink active:bg-sand',
                         unavailable && 'cursor-not-allowed opacity-45',
                       )}
                     >

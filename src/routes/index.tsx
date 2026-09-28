@@ -56,12 +56,12 @@ function Home() {
               </p>
               <p className="t-body text-linen">{site.hoursSummary}</p>
               <div className="flex shrink-0 flex-wrap gap-3">
-                <Link to="/" hash="menu" className="btn btn-light">
+                <Link to="/" hash="menu" className="btn btn-light btn-on-photo">
                   View menu
                 </Link>
                 <Link
                   to="/visit"
-                  className="btn border-linen/40 text-linen hover:bg-linen hover:text-espresso"
+                  className="btn btn-ghost btn-on-photo"
                 >
                   Visit us
                 </Link>

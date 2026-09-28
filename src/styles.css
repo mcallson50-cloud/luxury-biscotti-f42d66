@@ -175,34 +175,36 @@
     cursor: not-allowed;
   }
 
-  .btn-solid {
-    background: var(--color-espresso);
-    color: var(--color-linen);
-  }
-
-  .btn-solid:hover:not(:disabled) {
-    background: var(--color-clay);
-  }
-
-  .btn-ghost {
+  .btn-solid,
+  .btn-ghost,
+  .btn-light {
     background: transparent;
     color: var(--color-ink);
     border-color: color-mix(in oklab, var(--color-ink) 22%, transparent);
   }
 
-  .btn-ghost:hover:not(:disabled) {
-    background: var(--color-ink);
-    color: var(--color-linen);
-    border-color: var(--color-ink);
-  }
-
-  .btn-light {
-    background: var(--color-linen);
-    color: var(--color-espresso);
-  }
-
+  .btn-solid:hover:not(:disabled),
+  .btn-ghost:hover:not(:disabled),
   .btn-light:hover:not(:disabled) {
+    background: transparent;
+    border-color: color-mix(in oklab, var(--color-ink) 45%, transparent);
+  }
+
+  .btn:active:not(:disabled),
+  .btn[aria-selected="true"],
+  .btn[aria-pressed="true"] {
     background: var(--color-sand);
+    color: var(--color-ink);
+    border-color: var(--color-sand);
+  }
+
+  .btn-on-photo {
+    color: var(--color-linen);
+    border-color: color-mix(in oklab, var(--color-linen) 65%, transparent);
+  }
+
+  .btn-on-photo:hover:not(:disabled) {
+    border-color: var(--color-linen);
   }
 
   /* Quiet text link with a rule that draws in on hover */
