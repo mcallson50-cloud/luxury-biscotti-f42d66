@@ -51,7 +51,8 @@ export function InstagramFeed({ index }: { index?: string } = {}) {
           >
             <Frame
               photo={tile.photo}
-              ratio="square"
+              ratio="slab"
+              className="w-full [&>img]:absolute [&>img]:inset-0"
               radius="card"
               width={560}
               zoom
