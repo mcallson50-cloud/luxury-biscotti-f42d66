@@ -80,7 +80,8 @@
     },
     {
       "name": "Turmeric Latte",
-      "price": "35"
+      "price": "35",
+      "note": "Turmeric powder, spices and steamed milk"
     },
     {
       "name": "Fresh Hot Ginger Tea",
