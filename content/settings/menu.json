@@ -60,7 +60,8 @@
   "nonCoffee": [
     {
       "name": "Matcha",
-      "price": "40"
+      "price": "40",
+      "note": "Matcha powder whisked with steamed milk"
     },
     {
       "name": "Chai",
