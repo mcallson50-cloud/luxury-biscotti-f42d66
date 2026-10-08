@@ -75,7 +75,8 @@
     },
     {
       "name": "Beetroot Latte",
-      "price": "35"
+      "price": "35",
+      "note": "Beetroot powder with steamed milk"
     },
     {
       "name": "Turmeric Latte",
