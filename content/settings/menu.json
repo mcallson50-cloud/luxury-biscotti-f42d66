@@ -95,7 +95,8 @@
     },
     {
       "name": "Peach Iced Tea",
-      "price": "25"
+      "price": "25",
+      "note": "Refreshing iced tea with peach"
     }
   ],
   "specials": [
