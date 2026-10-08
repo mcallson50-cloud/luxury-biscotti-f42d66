@@ -60,12 +60,12 @@
   "nonCoffee": [
     {
       "name": "Matcha",
-      "price": "40",
-      "note": "Matcha whisked with steamed milk"
+      "price": "40"
     },
     {
       "name": "Chai",
-      "price": "35"
+      "price": "35",
+      "note": "Spiced chai with steamed milk"
     },
     {
       "name": "Hot Chocolate",
