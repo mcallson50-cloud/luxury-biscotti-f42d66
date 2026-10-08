@@ -80,7 +80,8 @@
     },
     {
       "name": "Fresh Hot Ginger Tea",
-      "price": "20"
+      "price": "20",
+      "note": "Fresh ginger infused with hot water"
     },
     {
       "name": "Lemon Iced Tea",
