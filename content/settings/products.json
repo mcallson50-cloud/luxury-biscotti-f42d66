@@ -230,7 +230,13 @@
         "id": "/media/CORDUROY_CAP_SAND_01.jpg",
         "alt": ""
       },
-      "gallery": [],
+      "gallery": [
+        {
+          "id": "/media/CORDUROY_CAP_SAND_02.jpg",
+          "alt": "blassa"
+        },
+        {}
+      ],
       "sizes": [
         "One size"
       ],
