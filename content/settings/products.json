@@ -235,7 +235,10 @@
           "id": "/media/CORDUROY_CAP_SAND_02.jpg",
           "alt": "blassa"
         },
-        {}
+        {
+          "id": "/media/CORDUROY_CAP_SAND_03.jpg",
+          "alt": "blassa"
+        }
       ],
       "sizes": [
         "One size"
