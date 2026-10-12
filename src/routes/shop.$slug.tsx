@@ -57,7 +57,8 @@ function PieceDetail() {
                 <Frame
                   key={`${photo}-${i}`}
                   photo={photo}
-                  ratio={i === 0 ? 'slab' : 'landscape'}
+                  ratio={i < 2 ? 'slab' : 'landscape'}
+                  className="w-full [&>img]:absolute [&>img]:inset-0"
                   priority={i === 0}
                   width={1600}
                   sizes="(min-width: 1024px) 56vw, 100vw"
