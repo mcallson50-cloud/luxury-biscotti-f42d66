@@ -1,8 +1,15 @@
 import { Link, useRouterState } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 
-import { nav, site } from '@/data/site'
+import { site } from '@/data/site'
 import { cn } from '@/lib/utils'
+
+const headerNav = [
+  { label: 'Home', to: '/', hash: '' },
+  { label: 'Menu', to: '/', hash: 'menu' },
+  { label: 'Shop', to: '/shop', hash: '' },
+  { label: 'Visit', to: '/visit', hash: '' },
+] as const
 
 /** Visible desktop navigation with a compact mobile menu. */
 export function SiteHeader() {
@@ -71,10 +78,9 @@ export function SiteHeader() {
         </Link>
 
         <nav aria-label="Primary" className={cn('hidden items-center gap-8 md:flex', onCream ? 'text-ink' : 'text-linen')}>
-          {nav.map((item) => (
-            <Link key={item.to} to={item.to} className="t-label link-rule py-2" activeProps={{ 'aria-current': 'page' }} activeOptions={{ exact: true }}>{item.label}</Link>
+          {headerNav.map((item) => (
+            <Link key={item.label} to={item.to} hash={item.hash} className="t-label link-rule py-2" activeProps={{ 'aria-current': 'page' }} activeOptions={{ exact: true, includeHash: true }}>{item.label}</Link>
           ))}
-          <Link to="/" hash="menu" className="t-label link-rule py-2">Menu</Link>
         </nav>
 
         <button
@@ -107,11 +113,11 @@ export function SiteHeader() {
         className="border-t border-ink/10 bg-cream px-5 pt-4 pb-6 md:hidden"
       >
         <nav className="grid gap-1" aria-label="Mobile navigation">
-          <Link to="/" hash="menu" onClick={() => setOpen(false)} className="t-display border-b border-ink/8 py-3.5 text-[34px]">View menu</Link>
-          {nav.map((item) => (
+          {headerNav.map((item) => (
             <Link
-              key={item.to}
+              key={item.label}
               to={item.to}
+              hash={item.hash}
               onClick={() => setOpen(false)}
               className="t-display border-b border-ink/8 py-3.5 text-[34px]"
             >
