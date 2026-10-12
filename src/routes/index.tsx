@@ -13,7 +13,6 @@ export const Route = createFileRoute('/')({ component: Home })
 function Home() {
   return (
     <>
-      {/* ── Hero: the photograph fills the first screen ─────────── */}
       <section className="relative">
         <div className="relative min-h-[640px] h-[90svh] max-h-[960px] w-full overflow-hidden">
           <Frame
@@ -71,7 +70,6 @@ function Home() {
         </div>
       </section>
 
-
       <section className="mt-16 md:mt-24">
         <Container>
           <div className="grid items-center gap-8 md:grid-cols-2 md:gap-16">
@@ -87,14 +85,6 @@ function Home() {
           </div>
         </Container>
       </section>
-      {/* ── The menu ───────────────────────────────────────────── */}
-      <section id="menu" className="mt-16 scroll-mt-28 md:mt-24">
-        <Container>
-          <SectionHead label="The menu" aside={home.menuCurrencyNote} />
-          <CafeMenu />
-        </Container>
-      </section>
-
 
       <section className="mt-16 md:mt-24">
         <Container>
@@ -112,7 +102,12 @@ function Home() {
         </Container>
       </section>
 
-      <InstagramFeed />
+      <section id="menu" className="mt-16 scroll-mt-28 md:mt-24">
+        <Container>
+          <SectionHead label="The menu" aside={home.menuCurrencyNote} />
+          <CafeMenu />
+        </Container>
+      </section>
 
       <section className="mt-16 md:mt-24">
         <Container>
@@ -126,6 +121,8 @@ function Home() {
           </div>
         </Container>
       </section>
+
+      <InstagramFeed />
     </>
   )
 }
