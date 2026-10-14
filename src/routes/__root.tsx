@@ -37,7 +37,7 @@ export const Route = createRootRoute({
         href: 'https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300..700;1,400&family=Anton&display=swap',
       },
       { rel: 'preconnect', href: 'https://images.unsplash.com' },
-      { rel: 'icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/jpeg', href: '/blassa-favicon.jpeg' },
     ],
   }),
   shellComponent: RootDocument,
