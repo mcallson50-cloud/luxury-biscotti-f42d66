@@ -58,7 +58,7 @@ export function SiteFooter() {
             © {site.copyrightYear} {site.name}
           </p>
           <p className="t-label text-ink-faint">
-            {site.address.city} — {site.address.country}
+            Created With Love
           </p>
         </div>
       </div>
