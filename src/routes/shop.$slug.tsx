@@ -1,6 +1,7 @@
 import { Link, createFileRoute, notFound } from '@tanstack/react-router'
 import { useState } from 'react'
 
+import { ProductName } from '@/components/product-name'
 import { Frame } from '@/components/media'
 import { Reveal } from '@/components/reveal'
 import { Container, SectionHead } from '@/components/ui/primitives'
@@ -75,12 +76,12 @@ function PieceDetail() {
 
           {/* Info — sticks while the gallery moves */}
           <div className="lg:col-span-5">
-            <div className="lg:sticky lg:top-28">
+            <div className="@container lg:sticky lg:top-28">
               <p className="t-label text-ink-faint">
                 {piece.colour}
               </p>
-              <h1 className="t-display mt-4 text-[clamp(38px,5vw,76px)]">
-                {piece.name}
+              <h1 className="t-display mt-4 text-[min(76px,9cqw)]">
+                <ProductName name={piece.name} />
               </h1>
               <p className="t-lead mt-5">{piece.summary}</p>
 
@@ -176,9 +177,9 @@ function PieceDetail() {
               params={{ slug: next.slug }}
               className="group mt-8 grid items-end gap-8 md:grid-cols-2"
             >
-              <div>
-                <h2 className="t-display text-[clamp(38px,6vw,96px)]">
-                  {next.name}
+              <div className="@container">
+                <h2 className="t-display text-[min(96px,9cqw)]">
+                  <ProductName name={next.name} />
                 </h2>
                 <p className="t-body mt-4 max-w-md">{next.summary}</p>
                 <span className="t-label link-rule mt-6 inline-block text-clay">

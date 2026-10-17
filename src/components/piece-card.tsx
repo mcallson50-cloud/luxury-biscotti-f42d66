@@ -1,5 +1,6 @@
 import { Link } from '@tanstack/react-router'
 
+import { ProductName } from '@/components/product-name'
 import { Frame } from '@/components/media'
 import type { Piece } from '@/data/collection'
 import { cn } from '@/lib/utils'
@@ -51,9 +52,9 @@ export function PieceCard({
       </div>
 
       <div className="mt-3.5 flex items-baseline justify-between gap-4 border-t border-ink/12 pt-2.5">
-        <div>
-          <h3 className="text-[15px] leading-tight">
-            {piece.name}
+        <div className="min-w-0 flex-1 @container">
+          <h3 className="text-[min(15px,7cqw)] leading-tight">
+            <ProductName name={piece.name} />
           </h3>
           <p className="t-label mt-1.5 text-ink-faint">{piece.colour}</p>
         </div>
