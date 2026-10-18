@@ -7,16 +7,16 @@
       "instagramUrl": "https://www.instagram.com/p/DeiMztwojGg/"
     },
     {
-      "id": "/media/instagram_01.png",
-      "alt": "A glass of coffee on a cream surface, leaf shadows falling across it",
-      "caption": "We’re proud to finally announce that @nina.skater is the first BLASSA team rider.",
-      "instagramUrl": "https://www.instagram.com/p/DdwFfiaOJ0m/"
-    },
-    {
       "id": "/media/instagram_02.jpg",
       "alt": "Sage green shirts hung close together on wooden hangers",
       "caption": "A new spot, a new vibe in Tamraght. Happy to play at @blassa.studio and share the energy.",
       "instagramUrl": "https://www.instagram.com/p/Ddjk2AGDSRg/?img_index=1"
+    },
+    {
+      "id": "/media/instagram_01.png",
+      "alt": "A glass of coffee on a cream surface, leaf shadows falling across it",
+      "caption": "We’re proud to finally announce that @nina.skater is the first BLASSA team rider.",
+      "instagramUrl": "https://www.instagram.com/p/DdwFfiaOJ0m/"
     },
     {
       "id": "/media/instagram_03.jpg",
