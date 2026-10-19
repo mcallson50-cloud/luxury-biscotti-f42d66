@@ -7,24 +7,6 @@
       "instagramUrl": "https://www.instagram.com/p/DeiMztwojGg/"
     },
     {
-      "id": "/media/instagram_02.jpg",
-      "alt": "Sage green shirts hung close together on wooden hangers",
-      "caption": "A new spot, a new vibe in Tamraght. Happy to play at @blassa.studio and share the energy.",
-      "instagramUrl": "https://www.instagram.com/p/Ddjk2AGDSRg/?img_index=1"
-    },
-    {
-      "id": "/media/instagram_01.png",
-      "alt": "A glass of coffee on a cream surface, leaf shadows falling across it",
-      "caption": "We’re proud to finally announce that @nina.skater is the first BLASSA team rider.",
-      "instagramUrl": "https://www.instagram.com/p/DdwFfiaOJ0m/"
-    },
-    {
-      "id": "/media/instagram_03.jpg",
-      "alt": "The espresso counter, timber shelving stacked with cups and bags of beans",
-      "caption": "WE ARE DIFFERENT",
-      "instagramUrl": "https://www.instagram.com/p/DdecbrYjPdD/?img_index=1"
-    },
-    {
       "id": "/media/CLASSIC_TEE_FUNDATION_01.jpg",
       "alt": "BLASSA GOES BERLIN <3",
       "caption": "BLASSA GOES BERLIN <3",
@@ -35,6 +17,24 @@
       "alt": "OLD FABRICS. NEW BAGS. YOUR CREATION. Create your own BLASSA bag at our upcycling workshop with @_tamzwakht_",
       "caption": "OLD FABRICS. NEW BAGS. YOUR CREATION. Create your own BLASSA bag at our upcycling workshop with @_tamzwakht_",
       "instagramUrl": "https://www.instagram.com/p/DeetMliO9ao/"
+    },
+    {
+      "id": "/media/instagram_01.png",
+      "alt": "A glass of coffee on a cream surface, leaf shadows falling across it",
+      "caption": "We’re proud to finally announce that @nina.skater is the first BLASSA team rider.",
+      "instagramUrl": "https://www.instagram.com/p/DdwFfiaOJ0m/"
+    },
+    {
+      "id": "/media/instagram_02.jpg",
+      "alt": "Sage green shirts hung close together on wooden hangers",
+      "caption": "A new spot, a new vibe in Tamraght. Happy to play at @blassa.studio and share the energy.",
+      "instagramUrl": "https://www.instagram.com/p/Ddjk2AGDSRg/?img_index=1"
+    },
+    {
+      "id": "/media/instagram_03.jpg",
+      "alt": "The espresso counter, timber shelving stacked with cups and bags of beans",
+      "caption": "WE ARE DIFFERENT",
+      "instagramUrl": "https://www.instagram.com/p/DdecbrYjPdD/?img_index=1"
     }
   ]
 }
