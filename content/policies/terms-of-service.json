@@ -1,0 +1,52 @@
+{
+  "title": "Terms of Service",
+  "description": "Terms of Service for BLASSA STUDIO.",
+  "updated": "22 October 2026",
+  "sections": [
+    {
+      "heading": "About this website",
+      "body": "This website is provided by BLASSA STUDIO, a café and creative space in Tamraght, Morocco. These terms cover your use of the website. Contact us at info@blassastudio.com with any questions.",
+      "links": []
+    },
+    {
+      "heading": "Information and availability",
+      "body": "We aim to keep our opening hours, menu, product details and prices accurate. Information may change, and items or services may become unavailable. Please contact us to confirm details before making a special trip or arranging a purchase.",
+      "links": []
+    },
+    {
+      "heading": "Shop enquiries and reservations",
+      "body": "Our online shop is a catalogue. The website does not currently accept online payments or complete purchases. Sending an enquiry or reservation request does not confirm an order. We will confirm availability, price, payment, collection or delivery arrangements and any applicable sale terms directly with you before you decide to buy.",
+      "links": []
+    },
+    {
+      "heading": "Using the website",
+      "body": "Please use this website lawfully. Do not interfere with its operation, attempt unauthorised access or submit unlawful, abusive or misleading material through our contact form.",
+      "links": []
+    },
+    {
+      "heading": "Images and creative work",
+      "body": "Our branding, photographs, designs and written content belong to us or their respective owners. Please ask before copying or using them commercially. Any use permitted by applicable law remains unaffected.",
+      "links": []
+    },
+    {
+      "heading": "External websites",
+      "body": "Links to Instagram, maps and other services take you to websites operated by third parties. Their own terms and privacy policies apply. We do not control their content or availability.",
+      "links": []
+    },
+    {
+      "heading": "Availability and your rights",
+      "body": "We take reasonable care in maintaining the website, but cannot promise uninterrupted access or that every detail is free from error. Nothing in these terms excludes liability that cannot lawfully be excluded or limits your mandatory consumer rights.",
+      "links": []
+    },
+    {
+      "heading": "Privacy and updates",
+      "body": "Our Privacy Policy explains how information is handled. We may update these terms as the website changes. The date above identifies the latest version.",
+      "links": [
+        {
+          "label": "Privacy Policy",
+          "url": "/privacy-policy"
+        }
+      ]
+    }
+  ]
+}

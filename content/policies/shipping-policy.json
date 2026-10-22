@@ -1,0 +1,37 @@
+{
+  "title": "Shipping Policy",
+  "description": "Shipping Policy for BLASSA STUDIO.",
+  "updated": "22 October 2026",
+  "sections": [
+    {
+      "heading": "Ordering from BLASSA",
+      "body": "Our website presents our collection and lets you enquire about pieces. There is currently no online checkout. A message or reservation request does not confirm a purchase or shipment.",
+      "links": []
+    },
+    {
+      "heading": "Collection and delivery arrangements",
+      "body": "Please contact us to discuss collection from BLASSA STUDIO in Tamraght, Morocco, or ask whether delivery is available for your destination. Availability depends on the item and destination and must be confirmed before payment.",
+      "links": []
+    },
+    {
+      "heading": "Costs and timing",
+      "body": "Where delivery is available, we will confirm shipping costs, the delivery address and the expected dispatch and delivery times before you agree to the purchase. We do not currently publish a standard shipping rate or guaranteed delivery timeframe.",
+      "links": []
+    },
+    {
+      "heading": "International delivery",
+      "body": "Please ask us whether we can ship to your country. Where international delivery is offered, we will explain any known customs arrangements and which charges are included before you confirm your purchase.",
+      "links": []
+    },
+    {
+      "heading": "Delivery questions",
+      "body": "If an agreed delivery is delayed, missing or arrives damaged, contact us with your purchase details so we can investigate and help resolve it. Please check your delivery details carefully and tell us promptly if they need correcting.",
+      "links": []
+    },
+    {
+      "heading": "Contact",
+      "body": "For collection or shipping enquiries, email info@blassastudio.com.",
+      "links": []
+    }
+  ]
+}

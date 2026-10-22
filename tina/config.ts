@@ -26,6 +26,27 @@ export default defineConfig({
   schema: {
     collections: [
       {
+        name: 'policies', label: 'Policies', path: 'content/policies',
+        format: 'json', ui: singleton,
+        fields: [
+          { ...text('title', 'Page title'), isTitle: true },
+          { ...text('description', 'Search engine description'), ui: { component: 'textarea' } },
+          text('updated', 'Last updated (for example: 22 October 2026)', false),
+          {
+            type: 'object', name: 'sections', label: 'Policy sections', list: true,
+            ui: { itemProps: (item) => ({ label: item.heading || 'New section' }) },
+            fields: [
+              text('heading', 'Section heading'),
+              { ...text('body', 'Text'), ui: { component: 'textarea' } },
+              {
+                type: 'object', name: 'links', label: 'Related links', list: true,
+                fields: [text('label', 'Link text'), text('url', 'URL')],
+              },
+            ],
+          },
+        ],
+      },
+      {
         name: 'aroundBlassa', label: 'Around Blassa photos', path: 'content/settings',
         format: 'json', match: { include: 'around-blassa' }, ui: singleton,
         fields: [{
