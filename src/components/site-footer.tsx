@@ -57,6 +57,10 @@ export function SiteFooter() {
           <p className="t-label text-ink-faint">
             © {site.copyrightYear} {site.name}
           </p>
+          <nav aria-label="Legal" className="flex flex-wrap gap-x-6 gap-y-3 text-[13px]">
+            <Link to="/terms-of-service" className="link-rule">Terms of Service</Link>
+            <Link to="/privacy-policy" className="link-rule">Privacy Policy</Link>
+          </nav>
           <p className="t-label text-ink-faint">
             Created With Love
           </p>

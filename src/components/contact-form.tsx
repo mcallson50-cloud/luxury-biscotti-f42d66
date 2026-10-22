@@ -1,3 +1,4 @@
+import { Link } from '@tanstack/react-router'
 import { useState } from 'react'
 
 import { encodeForm, FORMS_ENDPOINT } from '@/lib/forms'
@@ -175,7 +176,8 @@ export function ContactForm() {
           {state === 'sending' ? 'Sending' : 'Send it'}
         </button>
         <p className="t-body max-w-xs text-[13px]">
-          We keep your email for replying and nothing else.
+          We use your details to respond to your enquiry. Read our{' '}
+          <Link to="/privacy-policy" className="underline underline-offset-4">Privacy Policy</Link>.
         </p>
       </div>
 
