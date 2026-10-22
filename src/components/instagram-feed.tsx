@@ -106,7 +106,7 @@ export function InstagramFeed({ index }: { index?: string } = {}) {
       </Container>
 
       {/* A single row at every screen size, automatically drifting back and forth. */}
-      <div ref={track} id="around-blassa-photos" role="region" aria-label="Around BLASSA photos" tabIndex={0} className="mt-6 flex flex-nowrap gap-2.5 overflow-x-auto overscroll-x-contain scroll-px-5 px-5 pb-3 md:scroll-px-10 md:px-10">
+      <div ref={track} id="around-blassa-photos" role="region" aria-label="Around BLASSA photos" tabIndex={0} className="mt-6 flex flex-nowrap gap-2.5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden overscroll-x-contain scroll-px-5 px-5 pb-3 md:scroll-px-10 md:px-10">
         {tiles.map((tile) => (
           <a
             key={tile.photo}
