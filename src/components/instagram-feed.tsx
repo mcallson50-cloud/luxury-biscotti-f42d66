@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { Frame } from '@/components/media'
 import { Container, SectionHead } from '@/components/ui/primitives'
 import aroundBlassa from '../../content/settings/around-blassa.json'
@@ -20,35 +20,69 @@ const tiles = (aroundBlassa.photos as AroundPhoto[])
 
 export function InstagramFeed({ index }: { index?: string } = {}) {
   const track = useRef<HTMLDivElement>(null)
-  const [edges, setEdges] = useState({ start: true, end: false })
-
   useEffect(() => {
     const element = track.current
     if (!element) return
-    const update = () => setEdges({
-      start: element.scrollLeft <= 2,
-      end: element.scrollLeft + element.clientWidth >= element.scrollWidth - 2,
-    })
-    update()
-    element.addEventListener('scroll', update, { passive: true })
-    const observer = new ResizeObserver(update)
-    observer.observe(element)
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+    let frame = 0
+    let previous = 0
+    let position = element.scrollLeft
+    let direction = 1
+    let hovered = false
+    let focused = false
+    let touching = false
+    let resumeAt = 0
+
+    const pauseBriefly = () => { resumeAt = performance.now() + 2500 }
+    const pointerEnter = (event: PointerEvent) => {
+      if (event.pointerType === 'mouse') hovered = true
+    }
+    const pointerLeave = () => { hovered = false }
+    const pointerDown = () => { touching = true }
+    const pointerUp = () => { touching = false; pauseBriefly() }
+    const focusIn = () => { focused = true }
+    const focusOut = (event: FocusEvent) => {
+      focused = element.contains(event.relatedTarget as Node | null)
+    }
+
+    const animate = (now: number) => {
+      const elapsed = previous ? Math.min(now - previous, 50) : 0
+      previous = now
+      const max = element.scrollWidth - element.clientWidth
+      if (reducedMotion.matches || document.hidden || hovered || focused || touching || now < resumeAt || max <= 0) {
+        position = element.scrollLeft
+      } else {
+        position = Math.max(0, Math.min(max, position + direction * elapsed * 0.025))
+        element.scrollLeft = position
+        if (position >= max || position <= 0) {
+          direction = position >= max ? -1 : 1
+          resumeAt = now + 900
+        }
+      }
+      frame = requestAnimationFrame(animate)
+    }
+
+    element.addEventListener('pointerenter', pointerEnter)
+    element.addEventListener('pointerleave', pointerLeave)
+    element.addEventListener('pointerdown', pointerDown)
+    window.addEventListener('pointerup', pointerUp)
+    window.addEventListener('pointercancel', pointerUp)
+    element.addEventListener('focusin', focusIn)
+    element.addEventListener('focusout', focusOut)
+    element.addEventListener('wheel', pauseBriefly, { passive: true })
+    frame = requestAnimationFrame(animate)
     return () => {
-      element.removeEventListener('scroll', update)
-      observer.disconnect()
+      cancelAnimationFrame(frame)
+      element.removeEventListener('pointerenter', pointerEnter)
+      element.removeEventListener('pointerleave', pointerLeave)
+      element.removeEventListener('pointerdown', pointerDown)
+      window.removeEventListener('pointerup', pointerUp)
+      window.removeEventListener('pointercancel', pointerUp)
+      element.removeEventListener('focusin', focusIn)
+      element.removeEventListener('focusout', focusOut)
+      element.removeEventListener('wheel', pauseBriefly)
     }
   }, [])
-
-  const move = (direction: number) => {
-    const element = track.current
-    if (!element) return
-    const card = element.firstElementChild
-    const step = card ? card.getBoundingClientRect().width + 10 : element.clientWidth
-    element.scrollBy({
-      left: direction * step,
-      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
-    })
-  }
 
   if (!tiles.length) return null
 
@@ -71,15 +105,15 @@ export function InstagramFeed({ index }: { index?: string } = {}) {
         />
       </Container>
 
-      {/* A single row at every screen size, scrollable by touch or controls. */}
-      <div ref={track} id="around-blassa-photos" role="region" aria-label="Around BLASSA photos" tabIndex={0} className="mt-6 flex flex-nowrap snap-x snap-mandatory gap-2.5 overflow-x-auto overscroll-x-contain scroll-px-5 px-5 pb-3 md:scroll-px-10 md:px-10">
+      {/* A single row at every screen size, automatically drifting back and forth. */}
+      <div ref={track} id="around-blassa-photos" role="region" aria-label="Around BLASSA photos" tabIndex={0} className="mt-6 flex flex-nowrap gap-2.5 overflow-x-auto overscroll-x-contain scroll-px-5 px-5 pb-3 md:scroll-px-10 md:px-10">
         {tiles.map((tile) => (
           <a
             key={tile.photo}
             href={tile.href}
             target="_blank"
             rel="noreferrer noopener"
-            className="group relative w-[68vw] shrink-0 snap-start sm:w-[42vw] md:w-[30vw] lg:w-[26vw]"
+            className="group relative w-[68vw] shrink-0 sm:w-[42vw] md:w-[30vw] lg:w-[26vw]"
           >
             <Frame
               photo={tile.photo}
@@ -98,16 +132,6 @@ export function InstagramFeed({ index }: { index?: string } = {}) {
           </a>
         ))}
       </div>
-      <Container>
-        <div className="mt-4 flex justify-end gap-3" aria-label="Photo controls">
-          <button type="button" className="btn btn-ghost disabled:cursor-default disabled:opacity-35" aria-label="Previous photos" aria-controls="around-blassa-photos" disabled={edges.start} onClick={() => move(-1)}>
-            <span aria-hidden="true">←</span>
-          </button>
-          <button type="button" className="btn btn-ghost disabled:cursor-default disabled:opacity-35" aria-label="Next photos" aria-controls="around-blassa-photos" disabled={edges.end} onClick={() => move(1)}>
-            <span aria-hidden="true">→</span>
-          </button>
-        </div>
-      </Container>
     </section>
   )
 }
