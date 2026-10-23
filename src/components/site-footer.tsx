@@ -1,4 +1,5 @@
 import { Link } from '@tanstack/react-router'
+import { FileText, ShieldCheck, Truck, RotateCcw } from 'lucide-react'
 
 import { nav, site } from '@/data/site'
 
@@ -6,7 +7,7 @@ export function SiteFooter() {
   return (
     <footer className="mt-16 border-t border-ink/12 bg-cream md:mt-24">
       <div className="mx-auto max-w-[1560px] px-5 py-10 md:px-10 md:py-12">
-        <div className="grid gap-8 md:grid-cols-3 md:gap-10">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-[1.1fr_0.7fr_0.9fr_1.3fr] md:gap-10">
           <div>
             <p className="t-label text-ink-faint">{site.tagline}</p>
             <p className="t-display mt-4 text-[48px]">
@@ -28,6 +29,36 @@ export function SiteFooter() {
               ))}
             </ul>
           </div>
+
+          <nav aria-label="Policies">
+            <h2 className="t-label text-ink-faint">Policies</h2>
+            <ul className="mt-4 grid gap-2.5">
+              <li>
+                <Link to="/terms-of-service" className="inline-flex items-center gap-2.5 text-[15px]">
+                  <FileText size={15} strokeWidth={1.5} aria-hidden="true" className="shrink-0 text-ink-faint" />
+                  <span className="link-rule">Terms of Service</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/privacy-policy" className="inline-flex items-center gap-2.5 text-[15px]">
+                  <ShieldCheck size={15} strokeWidth={1.5} aria-hidden="true" className="shrink-0 text-ink-faint" />
+                  <span className="link-rule">Privacy Policy</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/shipping-policy" className="inline-flex items-center gap-2.5 text-[15px]">
+                  <Truck size={15} strokeWidth={1.5} aria-hidden="true" className="shrink-0 text-ink-faint" />
+                  <span className="link-rule">Shipping Policy</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/refund-policy" className="inline-flex items-center gap-2.5 text-[15px]">
+                  <RotateCcw size={15} strokeWidth={1.5} aria-hidden="true" className="shrink-0 text-ink-faint" />
+                  <span className="link-rule">Refund Policy</span>
+                </Link>
+              </li>
+            </ul>
+          </nav>
 
           <div>
             <h2 className="t-label text-ink-faint">Find us</h2>
@@ -57,12 +88,6 @@ export function SiteFooter() {
           <p className="t-label text-ink-faint">
             © {site.copyrightYear} {site.name}
           </p>
-          <nav aria-label="Legal" className="flex flex-wrap gap-x-6 gap-y-3 text-[13px] md:max-w-xl md:justify-center">
-            <Link to="/terms-of-service" className="link-rule">Terms of Service</Link>
-            <Link to="/privacy-policy" className="link-rule">Privacy Policy</Link>
-            <Link to="/shipping-policy" className="link-rule">Shipping Policy</Link>
-            <Link to="/refund-policy" className="link-rule">Refund Policy</Link>
-          </nav>
           <p className="t-label text-ink-faint">
             Created With Love
           </p>
