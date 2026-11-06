@@ -111,14 +111,14 @@
       "note": "Iced Matcha · milk · strawberry syrup · cold foam"
     },
     {
-      "name": "Iced Vanilla",
-      "price": "45",
-      "note": "Iced Coffee · milk · vanilla syrup · vanilla cold foam"
-    },
-    {
       "name": "Caramel Cloud",
       "price": "45",
       "note": "Iced Coffee · caramel milk · caramel cold foam"
+    },
+    {
+      "name": "Iced Vanilla",
+      "price": "45",
+      "note": "Iced Coffee · milk · vanilla syrup · vanilla cold foam"
     }
   ]
 }
