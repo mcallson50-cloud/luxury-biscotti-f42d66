@@ -6,8 +6,7 @@ Orientation for developers and AI agents working on the Blassa Studio site.
 
 A four-page marketing site for a café + clothing brand: Home/About, Shop (with
 per-piece detail pages), Journal (markdown articles), Visit/Contact. Heavy on
-photography and ambient video. No cart, no accounts, no database — the only
-server-side primitive in play is Netlify Forms.
+photography and ambient video. No cart, no accounts, no database. The contact form opens a prepared email in the visitor’s email app.
 
 ### Stack
 
@@ -18,9 +17,9 @@ server-side primitive in play is Netlify Forms.
 | Build      | Vite 7                                            |
 | Styling    | Tailwind CSS 4 (`@theme` tokens, no config file)  |
 | Content    | Content Collections (type-safe markdown) + marked |
-| Forms      | Netlify Forms                                     |
+| Forms      | Email-app composer                                     |
 | Language   | TypeScript 5.9, strict                            |
-| Deployment | Netlify                                           |
+| Deployment | Cloudflare Workers                                           |
 
 ## Directory structure
 
@@ -33,14 +32,12 @@ server-side primitive in play is Netlify Forms.
 │       ├── one-year-of-keeping-the-lights-on.md   # featured: true — pins the lead slot
 │       └── tazi-ceramics.md
 ├── public
-│   ├── __forms.html                   # Netlify Forms skeleton. Required. See "Forms".
 │   ├── favicon.ico
 │   └── media                          # Drop-in MP4 slots; see its README
 ├── src
 │   ├── components
 │   │   ├── ui/primitives.tsx          # Container, SectionHead, Rule
-│   │   ├── contact-form.tsx           # Netlify Forms → "contact"
-│   │   ├── newsletter-form.tsx        # Netlify Forms → "newsletter"
+│   │   ├── contact-form.tsx           # Email-app composer
 │   │   ├── instagram-feed.tsx         # Static curated grid (no API token yet)
 │   │   ├── marquee.tsx                # CSS scrolling word strip
 │   │   ├── media.tsx                  # Frame, Figure, VideoPanel + ratio scale
@@ -53,7 +50,6 @@ server-side primitive in play is Netlify Forms.
 │   │   ├── photos.ts                  # Photo registry + src()/alt() helpers
 │   │   └── site.ts                    # ⚠️ Placeholder address, hours, contact, socials
 │   ├── lib
-│   │   ├── forms.ts                   # FORMS_ENDPOINT + encodeForm()
 │   │   ├── journal.ts                 # Sorting, categories, formatDate, findPost, relatedPosts
 │   │   └── utils.ts                   # cn()
 │   ├── routes
@@ -67,7 +63,7 @@ server-side primitive in play is Netlify Forms.
 │   ├── router.tsx
 │   └── styles.css                     # The entire design system
 ├── content-collections.ts             # Zod schema for the journal collection
-├── netlify.toml
+├── wrangler.jsonc
 └── vite.config.ts
 ```
 
@@ -147,20 +143,10 @@ seventh piece is one array entry.
 
 ## Forms
 
-Netlify Forms needs a static HTML form at build time to register a form, which a
-TanStack Start SSR app does not produce. The workaround, which is load-bearing:
-
-1. `public/__forms.html` holds a hidden skeleton of every form — matching
-   `name`, matching field names, `data-netlify="true"`,
-   `netlify-honeypot="bot-field"`. **A field that is not in the skeleton is
-   dropped from the submission.**
-2. The React forms POST to `/__forms.html` (`FORMS_ENDPOINT`), never to `/` —
-   an SSR route swallows the body.
-3. Content type is `application/x-www-form-urlencoded`, with a hidden
-   `form-name` field naming the form and a hidden `bot-field` honeypot.
-
-Adding a field means editing both the component and `public/__forms.html`.
-Submissions only process on a deploy, not in `pnpm dev`.
+The contact component prepares a mailto draft using src/lib/contact-email.ts.
+It never claims a message was sent. Visitors must send from their email app.
+No hosted form processor, email API key or Netlify account is required.
+See CLOUDFLARE.md for builds, TinaCloud variables and deployment.
 
 ## Placeholders
 
@@ -191,5 +177,6 @@ Three things are deliberately stand-ins and are marked where they live:
 
 ```bash
 pnpm dev      # dev server on :3000
-pnpm build    # vite build → dist/client (per netlify.toml)
+pnpm build    # TinaCMS admin + Cloudflare Worker/assets build
+pnpm deploy   # build and deploy with Wrangler
 ```

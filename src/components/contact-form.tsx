@@ -1,10 +1,8 @@
 import { Link } from '@tanstack/react-router'
 import { useState } from 'react'
 
-import { encodeForm, FORMS_ENDPOINT } from '@/lib/forms'
+import { contactEmailUrl } from '@/lib/contact-email'
 import { site } from '@/data/site'
-
-type State = 'idle' | 'sending' | 'done' | 'error'
 
 const subjects = [
   'Just saying hello',
@@ -14,10 +12,7 @@ const subjects = [
   'Press',
 ] as const
 
-/**
- * Netlify Forms contact form. Registered at build time via the skeleton in
- * public/__forms.html — submissions only process on a deploy, not in dev.
- */
+/** Prepares an email in the visitor’s mail app; no server-side form service. */
 export function ContactForm() {
   const [fields, setFields] = useState({
     name: '',
@@ -25,7 +20,7 @@ export function ContactForm() {
     subject: subjects[0] as string,
     message: '',
   })
-  const [state, setState] = useState<State>('idle')
+  const [opened, setOpened] = useState(false)
   const [touched, setTouched] = useState(false)
 
   const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(fields.email)
@@ -39,63 +34,19 @@ export function ContactForm() {
       >,
     ) => {
       setFields((prev) => ({ ...prev, [key]: event.target.value }))
-      if (state === 'error') setState('idle')
+      setOpened(false)
     }
 
-  const submit = async (event: React.FormEvent) => {
+  const submit = (event: React.FormEvent) => {
     event.preventDefault()
     setTouched(true)
-    if (!emailValid || !fields.name || !fields.message) return
-    if (state === 'sending') return
-
-    setState('sending')
-    try {
-      const response = await fetch(FORMS_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: encodeForm({ 'form-name': 'contact', ...fields }),
-      })
-      if (!response.ok) throw new Error(String(response.status))
-      setState('done')
-    } catch {
-      setState('error')
-    }
-  }
-
-  if (state === 'done') {
-    return (
-      <div className="border-t border-clay/40 pt-7">
-        <p className="t-display text-[clamp(26px,3vw,40px)] text-clay">
-          Thank you — that’s landed.
-        </p>
-        <p className="t-body mt-4 max-w-sm">
-          Someone reads these between services, so give us a day or two. If it is
-          urgent, the phone is quicker: {site.contact.phone}.
-        </p>
-        <button
-          type="button"
-          onClick={() => {
-            setFields({ name: '', email: '', subject: subjects[0], message: '' })
-            setTouched(false)
-            setState('idle')
-          }}
-          className="btn btn-ghost mt-7"
-        >
-          Send another
-        </button>
-      </div>
-    )
+    if (!emailValid || !fields.name.trim() || !fields.message.trim()) return
+    window.location.href = contactEmailUrl(site.contact.email, fields)
+    setOpened(true)
   }
 
   return (
     <form onSubmit={submit} className="grid gap-7" noValidate>
-      <input type="hidden" name="form-name" value="contact" />
-      <p className="hidden">
-        <label>
-          Don’t fill this in <input name="bot-field" tabIndex={-1} />
-        </label>
-      </p>
-
       <div className="grid gap-7 sm:grid-cols-2">
         <label className="block">
           <span className="t-label text-ink-faint">Your name</span>
@@ -171,9 +122,8 @@ export function ContactForm() {
         <button
           type="submit"
           className="btn btn-solid"
-          disabled={state === 'sending'}
         >
-          {state === 'sending' ? 'Sending' : 'Send it'}
+          Open email app
         </button>
         <p className="t-body max-w-xs text-[13px]">
           We use your details to respond to your enquiry. Read our{' '}
@@ -181,15 +131,16 @@ export function ContactForm() {
         </p>
       </div>
 
-      {state === 'error' ? (
-        <p className="border-t border-[#9a4a34]/40 pt-4 text-[14px] text-[#9a4a34]">
-          Something went wrong sending that. Try again in a moment, or email{' '}
-          <a href={`mailto:${site.contact.email}`} className="underline">
-            {site.contact.email}
-          </a>
-          .
+      <p className="t-body text-[13px]">
+        This opens a prepared email. Send it from your email app to contact us.
+        If no email app opens, copy your message and email{' '}
+        <a href={`mailto:${site.contact.email}`} className="underline">{site.contact.email}</a>.
+      </p>
+      {opened && (
+        <p role="status" className="border-t border-clay/40 pt-4 text-[14px]">
+          Your email draft is ready to open. Your message has not been sent by this website.
         </p>
-      ) : null}
+      )}
     </form>
   )
 }

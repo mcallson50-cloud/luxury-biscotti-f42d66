@@ -7,3 +7,7 @@ dist/
 !.env.example
 tina/__generated__/
 public/admin/
+
+.wrangler/
+.dev.vars
+.dev.vars.*

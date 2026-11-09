@@ -1,7 +1,7 @@
 {
   "title": "Privacy Policy",
   "description": "Privacy Policy for BLASSA STUDIO.",
-  "updated": "22 October 2026",
+  "updated": "9 November 2026",
   "sections": [
     {
       "heading": "Who we are",
@@ -10,7 +10,7 @@
     },
     {
       "heading": "Information you provide",
-      "body": "When you use our contact form, we receive your name, email address, selected subject and message. Name, email and message are required to submit the form so we can understand and reply to your enquiry. If you contact us by email, we receive the information you choose to include. Please avoid sending sensitive personal information.",
+      "body": "The contact form prepares an email in your own email app using the name, email address, subject and message you enter. These details are not submitted to a form-processing service by this website. We receive them only if you send the email. Please avoid sending sensitive personal information.",
       "links": []
     },
     {
@@ -20,7 +20,7 @@
     },
     {
       "heading": "Hosting and service providers",
-      "body": "The website and contact form use Netlify. Hosting and form services may process technical details such as IP address, browser information and request times, as well as submitted form data. Our email provider also processes messages sent to or from us. These providers process information to deliver their services and may use infrastructure outside Morocco. We may also disclose information where required by law.",
+      "body": "The website is hosted on Cloudflare. Hosting services may process technical details such as IP address, browser information and request times to operate and secure the site. Our email provider processes messages sent to or from us. These providers may use infrastructure outside Morocco. We may also disclose information where required by law.",
       "links": []
     },
     {
